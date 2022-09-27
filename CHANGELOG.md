@@ -1,3 +1,7 @@
+# v1.0.0-alpha.3
+
+- (bug) Add missing `tenantId` field to `GetDataRequest`
+
 # v1.0.0-alpha.2
 
 - (bug) Fix `GetProjectionsResponse` field naming
