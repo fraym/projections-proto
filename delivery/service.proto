@@ -1,0 +1,7 @@
+syntax = "proto3";
+package delivery;
+import "delivery/getData.proto";
+  
+service Service {
+	rpc GetData(GetDataRequest) returns (GetDataResponse);
+}

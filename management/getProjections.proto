@@ -1,0 +1,8 @@
+syntax = "proto3";
+package management;
+
+message GetProjectionsRequest {}
+
+message GetProjectionsResponse {
+	repeated string name = 1;
+}

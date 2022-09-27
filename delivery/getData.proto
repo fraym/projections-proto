@@ -1,0 +1,15 @@
+syntax = "proto3";
+package delivery;
+
+message GetDataRequest {
+	string projection = 1;
+	string data_id = 2;
+	int32 limit = 3;
+	int32 page = 4;
+}
+
+message GetDataResponse {
+	string data = 1;
+	int32 limit = 2;
+	int32 page = 3;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+package management;
+import "management/createProjections.proto";
+import "management/updateProjections.proto";
+import "management/removeProjections.proto";
+import "management/getProjections.proto";
+  
+service Service {
+	rpc CreateProjections(CreateProjectionsRequest) returns (CreateProjectionsResponse);
+	rpc UpdateProjections(UpdateProjectionsRequest) returns (UpdateProjectionsResponse);
+	rpc RemoveProjections(RemoveProjectionsRequest) returns (RemoveProjectionsResponse);
+	rpc GetProjections(GetProjectionsRequest) returns (GetProjectionsResponse);
+}

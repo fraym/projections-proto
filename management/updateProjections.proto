@@ -1,0 +1,8 @@
+syntax = "proto3";
+package management;
+
+message UpdateProjectionsRequest {
+	string schema = 1;
+}
+
+message UpdateProjectionsResponse {}
