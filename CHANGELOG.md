@@ -1,3 +1,7 @@
+# v1.0.0-alpha.4
+
+- (bug) Fix `GetDataResponse`: use `result` field of type `repeated Data`
+
 # v1.0.0-alpha.3
 
 - (bug) Add missing `tenantId` field to `GetDataRequest`
