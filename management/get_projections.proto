@@ -4,5 +4,5 @@ package management;
 message GetProjectionsRequest {}
 
 message GetProjectionsResponse {
-	repeated string name = 1;
+	repeated string projection_names = 1;
 }

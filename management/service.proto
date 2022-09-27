@@ -1,9 +1,9 @@
 syntax = "proto3";
 package management;
-import "management/createProjections.proto";
-import "management/updateProjections.proto";
-import "management/removeProjections.proto";
-import "management/getProjections.proto";
+import "management/create_projections.proto";
+import "management/update_projections.proto";
+import "management/remove_projections.proto";
+import "management/get_projections.proto";
   
 service Service {
 	rpc CreateProjections(CreateProjectionsRequest) returns (CreateProjectionsResponse);
