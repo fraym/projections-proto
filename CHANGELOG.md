@@ -1,3 +1,8 @@
+# v1.0.0-alpha.5
+
+- (feature) Add generated go code
+- (feature) Add generated nodejs code
+
 # v1.0.0-alpha.4
 
 - (bug) Fix `GetDataResponse`: use `result` field of type `repeated Data`
