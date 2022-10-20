@@ -7,7 +7,7 @@ This repository contains all protocol buffers for the gRPC api of the projection
 ### Install go package
 
 ```bash
-go get -u github.com/fraym-work/projections-proto/go/v5
+go get -u github.com/fraym-work/projections-proto/go
 ```
 
 ### Install nodejs package
@@ -26,16 +26,12 @@ npm i @fraym/projections-proto
 6. release nodejs code by executing `make publish-nodejs`
 7. release go code by creating a new git release with a tag in the form of `go/v1.0.0` (the prefix `go/` is important)
 
-## components
+## Components
 
-### management
+### Management
 
 Contains all proto files for the management api of the projections service.
 
-### delivery
+### Delivery
 
 Contains all proto files for the delivery api of the projections service.
-
-## ahg todos:
-
-- all paths ohne pagination
