@@ -1,3 +1,8 @@
+# v1.0.0-alpha.6
+
+- (bc) Prevent naming conflicts
+- (bc) Transport schema as object instead of strings
+
 # v1.0.0-alpha.5
 
 - (feature) Add generated go code

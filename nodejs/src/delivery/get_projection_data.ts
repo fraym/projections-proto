@@ -3,7 +3,7 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "delivery";
 
-export interface GetDataRequest {
+export interface GetProjectionDataRequest {
   projection: string;
   tenantId: string;
   dataId: string;
@@ -11,27 +11,27 @@ export interface GetDataRequest {
   page: number;
 }
 
-export interface Data {
+export interface ProjectionData {
   data: { [key: string]: string };
 }
 
-export interface Data_DataEntry {
+export interface ProjectionData_DataEntry {
   key: string;
   value: string;
 }
 
-export interface GetDataResponse {
-  result: Data[];
+export interface GetProjectionDataResponse {
+  result: ProjectionData[];
   limit: number;
   page: number;
 }
 
-function createBaseGetDataRequest(): GetDataRequest {
+function createBaseGetProjectionDataRequest(): GetProjectionDataRequest {
   return { projection: "", tenantId: "", dataId: "", limit: 0, page: 0 };
 }
 
-export const GetDataRequest = {
-  encode(message: GetDataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const GetProjectionDataRequest = {
+  encode(message: GetProjectionDataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.projection !== "") {
       writer.uint32(10).string(message.projection);
     }
@@ -50,10 +50,10 @@ export const GetDataRequest = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetDataRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionDataRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetDataRequest();
+    const message = createBaseGetProjectionDataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -80,7 +80,7 @@ export const GetDataRequest = {
     return message;
   },
 
-  fromJSON(object: any): GetDataRequest {
+  fromJSON(object: any): GetProjectionDataRequest {
     return {
       projection: isSet(object.projection) ? String(object.projection) : "",
       tenantId: isSet(object.tenantId) ? String(object.tenantId) : "",
@@ -90,7 +90,7 @@ export const GetDataRequest = {
     };
   },
 
-  toJSON(message: GetDataRequest): unknown {
+  toJSON(message: GetProjectionDataRequest): unknown {
     const obj: any = {};
     message.projection !== undefined && (obj.projection = message.projection);
     message.tenantId !== undefined && (obj.tenantId = message.tenantId);
@@ -100,8 +100,8 @@ export const GetDataRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetDataRequest>, I>>(object: I): GetDataRequest {
-    const message = createBaseGetDataRequest();
+  fromPartial<I extends Exact<DeepPartial<GetProjectionDataRequest>, I>>(object: I): GetProjectionDataRequest {
+    const message = createBaseGetProjectionDataRequest();
     message.projection = object.projection ?? "";
     message.tenantId = object.tenantId ?? "";
     message.dataId = object.dataId ?? "";
@@ -111,27 +111,27 @@ export const GetDataRequest = {
   },
 };
 
-function createBaseData(): Data {
+function createBaseProjectionData(): ProjectionData {
   return { data: {} };
 }
 
-export const Data = {
-  encode(message: Data, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionData = {
+  encode(message: ProjectionData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     Object.entries(message.data).forEach(([key, value]) => {
-      Data_DataEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
+      ProjectionData_DataEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Data {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseData();
+    const message = createBaseProjectionData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          const entry1 = Data_DataEntry.decode(reader, reader.uint32());
+          const entry1 = ProjectionData_DataEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.data[entry1.key] = entry1.value;
           }
@@ -144,7 +144,7 @@ export const Data = {
     return message;
   },
 
-  fromJSON(object: any): Data {
+  fromJSON(object: any): ProjectionData {
     return {
       data: isObject(object.data)
         ? Object.entries(object.data).reduce<{ [key: string]: string }>((acc, [key, value]) => {
@@ -155,7 +155,7 @@ export const Data = {
     };
   },
 
-  toJSON(message: Data): unknown {
+  toJSON(message: ProjectionData): unknown {
     const obj: any = {};
     obj.data = {};
     if (message.data) {
@@ -166,8 +166,8 @@ export const Data = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Data>, I>>(object: I): Data {
-    const message = createBaseData();
+  fromPartial<I extends Exact<DeepPartial<ProjectionData>, I>>(object: I): ProjectionData {
+    const message = createBaseProjectionData();
     message.data = Object.entries(object.data ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[key] = String(value);
@@ -178,12 +178,12 @@ export const Data = {
   },
 };
 
-function createBaseData_DataEntry(): Data_DataEntry {
+function createBaseProjectionData_DataEntry(): ProjectionData_DataEntry {
   return { key: "", value: "" };
 }
 
-export const Data_DataEntry = {
-  encode(message: Data_DataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionData_DataEntry = {
+  encode(message: ProjectionData_DataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -193,10 +193,10 @@ export const Data_DataEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Data_DataEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionData_DataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseData_DataEntry();
+    const message = createBaseProjectionData_DataEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -214,33 +214,33 @@ export const Data_DataEntry = {
     return message;
   },
 
-  fromJSON(object: any): Data_DataEntry {
+  fromJSON(object: any): ProjectionData_DataEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
   },
 
-  toJSON(message: Data_DataEntry): unknown {
+  toJSON(message: ProjectionData_DataEntry): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Data_DataEntry>, I>>(object: I): Data_DataEntry {
-    const message = createBaseData_DataEntry();
+  fromPartial<I extends Exact<DeepPartial<ProjectionData_DataEntry>, I>>(object: I): ProjectionData_DataEntry {
+    const message = createBaseProjectionData_DataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
   },
 };
 
-function createBaseGetDataResponse(): GetDataResponse {
+function createBaseGetProjectionDataResponse(): GetProjectionDataResponse {
   return { result: [], limit: 0, page: 0 };
 }
 
-export const GetDataResponse = {
-  encode(message: GetDataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const GetProjectionDataResponse = {
+  encode(message: GetProjectionDataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.result) {
-      Data.encode(v!, writer.uint32(10).fork()).ldelim();
+      ProjectionData.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.limit !== 0) {
       writer.uint32(16).int32(message.limit);
@@ -251,15 +251,15 @@ export const GetDataResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetDataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionDataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetDataResponse();
+    const message = createBaseGetProjectionDataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.result.push(Data.decode(reader, reader.uint32()));
+          message.result.push(ProjectionData.decode(reader, reader.uint32()));
           break;
         case 2:
           message.limit = reader.int32();
@@ -275,18 +275,18 @@ export const GetDataResponse = {
     return message;
   },
 
-  fromJSON(object: any): GetDataResponse {
+  fromJSON(object: any): GetProjectionDataResponse {
     return {
-      result: Array.isArray(object?.result) ? object.result.map((e: any) => Data.fromJSON(e)) : [],
+      result: Array.isArray(object?.result) ? object.result.map((e: any) => ProjectionData.fromJSON(e)) : [],
       limit: isSet(object.limit) ? Number(object.limit) : 0,
       page: isSet(object.page) ? Number(object.page) : 0,
     };
   },
 
-  toJSON(message: GetDataResponse): unknown {
+  toJSON(message: GetProjectionDataResponse): unknown {
     const obj: any = {};
     if (message.result) {
-      obj.result = message.result.map((e) => e ? Data.toJSON(e) : undefined);
+      obj.result = message.result.map((e) => e ? ProjectionData.toJSON(e) : undefined);
     } else {
       obj.result = [];
     }
@@ -295,9 +295,9 @@ export const GetDataResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetDataResponse>, I>>(object: I): GetDataResponse {
-    const message = createBaseGetDataResponse();
-    message.result = object.result?.map((e) => Data.fromPartial(e)) || [];
+  fromPartial<I extends Exact<DeepPartial<GetProjectionDataResponse>, I>>(object: I): GetProjectionDataResponse {
+    const message = createBaseGetProjectionDataResponse();
+    message.result = object.result?.map((e) => ProjectionData.fromPartial(e)) || [];
     message.limit = object.limit ?? 0;
     message.page = object.page ?? 0;
     return message;

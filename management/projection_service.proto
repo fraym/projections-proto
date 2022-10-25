@@ -5,7 +5,7 @@ import "management/update_projections.proto";
 import "management/remove_projections.proto";
 import "management/get_projections.proto";
   
-service Service {
+service ProjectionsService {
 	rpc CreateProjections(CreateProjectionsRequest) returns (CreateProjectionsResponse);
 	rpc UpdateProjections(UpdateProjectionsRequest) returns (UpdateProjectionsResponse);
 	rpc RemoveProjections(RemoveProjectionsRequest) returns (RemoveProjectionsResponse);

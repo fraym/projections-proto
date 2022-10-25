@@ -1,23 +1,23 @@
 export {
-    ServiceClient as DeliveryServiceClient,
-    ServiceServer as DeliveryServiceServer,
-    ServiceService as DeliveryServiceService,
-} from "./delivery/service";
+    ProjectionsServiceClient as DeliveryServiceClient,
+    ProjectionsServiceServer as DeliveryServiceServer,
+    ProjectionsServiceService as DeliveryServiceService,
+} from "./delivery/projection_service";
 
 export {
-    Data,
-    Data_DataEntry,
+    ProjectionData,
+    ProjectionData_DataEntry,
     DeepPartial,
     Exact,
-    GetDataRequest,
-    GetDataResponse,
-} from "./delivery/get_data";
+    GetProjectionDataRequest,
+    GetProjectionDataResponse,
+} from "./delivery/get_projection_data";
 
 export {
-    ServiceClient as ManagementServiceClient,
-    ServiceServer as ManagementServiceServer,
-    ServiceService as ManagementServiceService,
-} from "./management/service";
+    ProjectionsServiceClient as ManagementServiceClient,
+    ProjectionsServiceServer as ManagementServiceServer,
+    ProjectionsServiceService as ManagementServiceService,
+} from "./management/projection_service";
 
 export {
     CreateProjectionsRequest,

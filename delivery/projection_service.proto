@@ -1,0 +1,7 @@
+syntax = "proto3";
+package delivery;
+import "delivery/get_projection_data.proto";
+  
+service ProjectionsService {
+	rpc GetData(GetProjectionDataRequest) returns (GetProjectionDataResponse);
+}
