@@ -1,3 +1,7 @@
+# v1.0.0-alpha.7
+
+- (bc) Remove deprecated go code
+
 # v1.0.0-alpha.6
 
 - (bc) Prevent naming conflicts
