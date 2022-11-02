@@ -1,3 +1,7 @@
+# v1.0.0-alpha.8
+
+- (bc) Update org name
+
 # v1.0.0-alpha.7
 
 - (bc) Remove deprecated go code

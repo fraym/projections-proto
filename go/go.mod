@@ -1,4 +1,4 @@
-module github.com/fraym-work/projections-proto/go
+module github.com/fraym/projections-proto/go
 
 go 1.18
 

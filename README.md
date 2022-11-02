@@ -7,7 +7,7 @@ This repository contains all protocol buffers for the gRPC api of the projection
 ### Install go package
 
 ```bash
-go get -u github.com/fraym-work/projections-proto/go
+go get -u github.com/fraym/projections-proto/go
 ```
 
 ### Install nodejs package

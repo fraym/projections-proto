@@ -2,10 +2,10 @@
     "name": "@fraym/projections-proto",
     "version": "1.0.0-alpha.6",
     "license": "UNLICENSED",
-    "homepage": "https://github.com/fraym-work/projections-proto",
+    "homepage": "https://github.com/fraym/projections-proto",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/fraym-work/projections-proto.git"
+        "url": "git+https://github.com/fraym/projections-proto.git"
     },
     "description": "nodejs generated protobuf code for our projection service",
     "scripts": {
