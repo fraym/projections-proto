@@ -1,3 +1,7 @@
+# v1.0.0-alpha.9
+
+- (feature) Add `returnEmptyDataIfNotFound` to `GetProjectionDataRequest`
+
 # v1.0.0-alpha.8
 
 - (bc) Update org name

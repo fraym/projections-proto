@@ -9,6 +9,7 @@ export interface GetProjectionDataRequest {
   dataId: string;
   limit: number;
   page: number;
+  returnEmptyDataIfNotFound: boolean;
 }
 
 export interface ProjectionData {
@@ -27,7 +28,7 @@ export interface GetProjectionDataResponse {
 }
 
 function createBaseGetProjectionDataRequest(): GetProjectionDataRequest {
-  return { projection: "", tenantId: "", dataId: "", limit: 0, page: 0 };
+  return { projection: "", tenantId: "", dataId: "", limit: 0, page: 0, returnEmptyDataIfNotFound: false };
 }
 
 export const GetProjectionDataRequest = {
@@ -46,6 +47,9 @@ export const GetProjectionDataRequest = {
     }
     if (message.page !== 0) {
       writer.uint32(40).int32(message.page);
+    }
+    if (message.returnEmptyDataIfNotFound === true) {
+      writer.uint32(48).bool(message.returnEmptyDataIfNotFound);
     }
     return writer;
   },
@@ -72,6 +76,9 @@ export const GetProjectionDataRequest = {
         case 5:
           message.page = reader.int32();
           break;
+        case 6:
+          message.returnEmptyDataIfNotFound = reader.bool();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -87,6 +94,9 @@ export const GetProjectionDataRequest = {
       dataId: isSet(object.dataId) ? String(object.dataId) : "",
       limit: isSet(object.limit) ? Number(object.limit) : 0,
       page: isSet(object.page) ? Number(object.page) : 0,
+      returnEmptyDataIfNotFound: isSet(object.returnEmptyDataIfNotFound)
+        ? Boolean(object.returnEmptyDataIfNotFound)
+        : false,
     };
   },
 
@@ -97,6 +107,8 @@ export const GetProjectionDataRequest = {
     message.dataId !== undefined && (obj.dataId = message.dataId);
     message.limit !== undefined && (obj.limit = Math.round(message.limit));
     message.page !== undefined && (obj.page = Math.round(message.page));
+    message.returnEmptyDataIfNotFound !== undefined &&
+      (obj.returnEmptyDataIfNotFound = message.returnEmptyDataIfNotFound);
     return obj;
   },
 
@@ -107,6 +119,7 @@ export const GetProjectionDataRequest = {
     message.dataId = object.dataId ?? "";
     message.limit = object.limit ?? 0;
     message.page = object.page ?? 0;
+    message.returnEmptyDataIfNotFound = object.returnEmptyDataIfNotFound ?? false;
     return message;
   },
 };
