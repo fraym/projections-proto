@@ -1,3 +1,7 @@
+# v1.0.0-alpha.11
+
+- (bug) Fix `DataFilter`
+
 # v1.0.0-alpha.10
 
 - (feature) Add `DataFilter` to `GetProjectionDataRequest`

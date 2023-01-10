@@ -13,8 +13,8 @@ message GetProjectionDataRequest {
 
 message DataFilter {
 	map<string, DataFieldFilter> fields = 1;
-	repeated DataFieldFilter and = 2;
-	repeated DataFieldFilter or = 3;
+	repeated DataFilter and = 2;
+	repeated DataFilter or = 3;
 }
 
 message DataFieldFilter {

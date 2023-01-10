@@ -8,7 +8,6 @@ export {
     ProjectionData,
     ProjectionData_DataEntry,
     DeepPartial,
-    Exact,
     GetProjectionDataRequest,
     GetProjectionDataResponse,
     DataFilter,

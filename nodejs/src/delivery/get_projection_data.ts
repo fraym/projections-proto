@@ -15,8 +15,8 @@ export interface GetProjectionDataRequest {
 
 export interface DataFilter {
   fields: { [key: string]: DataFieldFilter };
-  and: DataFieldFilter[];
-  or: DataFieldFilter[];
+  and: DataFilter[];
+  or: DataFilter[];
 }
 
 export interface DataFilter_FieldsEntry {
@@ -146,7 +146,7 @@ export const GetProjectionDataRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetProjectionDataRequest>, I>>(object: I): GetProjectionDataRequest {
+  fromPartial(object: DeepPartial<GetProjectionDataRequest>): GetProjectionDataRequest {
     const message = createBaseGetProjectionDataRequest();
     message.projection = object.projection ?? "";
     message.tenantId = object.tenantId ?? "";
@@ -171,10 +171,10 @@ export const DataFilter = {
       DataFilter_FieldsEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
     for (const v of message.and) {
-      DataFieldFilter.encode(v!, writer.uint32(18).fork()).ldelim();
+      DataFilter.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.or) {
-      DataFieldFilter.encode(v!, writer.uint32(26).fork()).ldelim();
+      DataFilter.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -193,10 +193,10 @@ export const DataFilter = {
           }
           break;
         case 2:
-          message.and.push(DataFieldFilter.decode(reader, reader.uint32()));
+          message.and.push(DataFilter.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.or.push(DataFieldFilter.decode(reader, reader.uint32()));
+          message.or.push(DataFilter.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -214,8 +214,8 @@ export const DataFilter = {
           return acc;
         }, {})
         : {},
-      and: Array.isArray(object?.and) ? object.and.map((e: any) => DataFieldFilter.fromJSON(e)) : [],
-      or: Array.isArray(object?.or) ? object.or.map((e: any) => DataFieldFilter.fromJSON(e)) : [],
+      and: Array.isArray(object?.and) ? object.and.map((e: any) => DataFilter.fromJSON(e)) : [],
+      or: Array.isArray(object?.or) ? object.or.map((e: any) => DataFilter.fromJSON(e)) : [],
     };
   },
 
@@ -228,19 +228,19 @@ export const DataFilter = {
       });
     }
     if (message.and) {
-      obj.and = message.and.map((e) => e ? DataFieldFilter.toJSON(e) : undefined);
+      obj.and = message.and.map((e) => e ? DataFilter.toJSON(e) : undefined);
     } else {
       obj.and = [];
     }
     if (message.or) {
-      obj.or = message.or.map((e) => e ? DataFieldFilter.toJSON(e) : undefined);
+      obj.or = message.or.map((e) => e ? DataFilter.toJSON(e) : undefined);
     } else {
       obj.or = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DataFilter>, I>>(object: I): DataFilter {
+  fromPartial(object: DeepPartial<DataFilter>): DataFilter {
     const message = createBaseDataFilter();
     message.fields = Object.entries(object.fields ?? {}).reduce<{ [key: string]: DataFieldFilter }>(
       (acc, [key, value]) => {
@@ -251,8 +251,8 @@ export const DataFilter = {
       },
       {},
     );
-    message.and = object.and?.map((e) => DataFieldFilter.fromPartial(e)) || [];
-    message.or = object.or?.map((e) => DataFieldFilter.fromPartial(e)) || [];
+    message.and = object.and?.map((e) => DataFilter.fromPartial(e)) || [];
+    message.or = object.or?.map((e) => DataFilter.fromPartial(e)) || [];
     return message;
   },
 };
@@ -307,7 +307,7 @@ export const DataFilter_FieldsEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DataFilter_FieldsEntry>, I>>(object: I): DataFilter_FieldsEntry {
+  fromPartial(object: DeepPartial<DataFilter_FieldsEntry>): DataFilter_FieldsEntry {
     const message = createBaseDataFilter_FieldsEntry();
     message.key = object.key ?? "";
     message.value = (object.value !== undefined && object.value !== null)
@@ -375,7 +375,7 @@ export const DataFieldFilter = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DataFieldFilter>, I>>(object: I): DataFieldFilter {
+  fromPartial(object: DeepPartial<DataFieldFilter>): DataFieldFilter {
     const message = createBaseDataFieldFilter();
     message.type = object.type ?? "";
     message.operation = object.operation ?? "";
@@ -439,7 +439,7 @@ export const ProjectionData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProjectionData>, I>>(object: I): ProjectionData {
+  fromPartial(object: DeepPartial<ProjectionData>): ProjectionData {
     const message = createBaseProjectionData();
     message.data = Object.entries(object.data ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
       if (value !== undefined) {
@@ -498,7 +498,7 @@ export const ProjectionData_DataEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProjectionData_DataEntry>, I>>(object: I): ProjectionData_DataEntry {
+  fromPartial(object: DeepPartial<ProjectionData_DataEntry>): ProjectionData_DataEntry {
     const message = createBaseProjectionData_DataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
@@ -568,7 +568,7 @@ export const GetProjectionDataResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetProjectionDataResponse>, I>>(object: I): GetProjectionDataResponse {
+  fromPartial(object: DeepPartial<GetProjectionDataResponse>): GetProjectionDataResponse {
     const message = createBaseGetProjectionDataResponse();
     message.result = object.result?.map((e) => ProjectionData.fromPartial(e)) || [];
     message.limit = object.limit ?? 0;
@@ -584,10 +584,6 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends { $case: string } ? { [K in keyof Omit<T, "$case">]?: DeepPartial<T[K]> } & { $case: T["$case"] }
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;
