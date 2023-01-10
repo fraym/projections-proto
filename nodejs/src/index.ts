@@ -11,6 +11,9 @@ export {
     Exact,
     GetProjectionDataRequest,
     GetProjectionDataResponse,
+    DataFilter,
+    DataFilter_FieldsEntry,
+    DataFieldFilter,
 } from "./delivery/get_projection_data";
 
 export {

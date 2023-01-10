@@ -1,3 +1,7 @@
+# v1.0.0-alpha.10
+
+- (feature) Add `DataFilter` to `GetProjectionDataRequest`
+
 # v1.0.0-alpha.9
 
 - (feature) Add `returnEmptyDataIfNotFound` to `GetProjectionDataRequest`
