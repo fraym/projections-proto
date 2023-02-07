@@ -1,3 +1,7 @@
+# v1.0.0-alpha.12
+
+- (feature) Add `DataOrder` to `GetProjectionDataRequest`
+
 # v1.0.0-alpha.11
 
 - (bug) Fix `DataFilter`

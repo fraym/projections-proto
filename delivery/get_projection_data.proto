@@ -9,6 +9,12 @@ message GetProjectionDataRequest {
 	int32 page = 5;
 	bool returnEmptyDataIfNotFound = 6;
 	DataFilter filter = 7;
+	repeated DataOrder order = 8;
+}
+
+message DataOrder {
+	string field = 1;
+	bool descending = 2;
 }
 
 message DataFilter {

@@ -13,6 +13,7 @@ export {
     DataFilter,
     DataFilter_FieldsEntry,
     DataFieldFilter,
+    DataOrder,
 } from "./delivery/get_projection_data";
 
 export {

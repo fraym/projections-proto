@@ -11,6 +11,12 @@ export interface GetProjectionDataRequest {
   page: number;
   returnEmptyDataIfNotFound: boolean;
   filter: DataFilter | undefined;
+  order: DataOrder[];
+}
+
+export interface DataOrder {
+  field: string;
+  descending: boolean;
 }
 
 export interface DataFilter {
@@ -54,6 +60,7 @@ function createBaseGetProjectionDataRequest(): GetProjectionDataRequest {
     page: 0,
     returnEmptyDataIfNotFound: false,
     filter: undefined,
+    order: [],
   };
 }
 
@@ -79,6 +86,9 @@ export const GetProjectionDataRequest = {
     }
     if (message.filter !== undefined) {
       DataFilter.encode(message.filter, writer.uint32(58).fork()).ldelim();
+    }
+    for (const v of message.order) {
+      DataOrder.encode(v!, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -111,6 +121,9 @@ export const GetProjectionDataRequest = {
         case 7:
           message.filter = DataFilter.decode(reader, reader.uint32());
           break;
+        case 8:
+          message.order.push(DataOrder.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -130,6 +143,7 @@ export const GetProjectionDataRequest = {
         ? Boolean(object.returnEmptyDataIfNotFound)
         : false,
       filter: isSet(object.filter) ? DataFilter.fromJSON(object.filter) : undefined,
+      order: Array.isArray(object?.order) ? object.order.map((e: any) => DataOrder.fromJSON(e)) : [],
     };
   },
 
@@ -143,6 +157,11 @@ export const GetProjectionDataRequest = {
     message.returnEmptyDataIfNotFound !== undefined &&
       (obj.returnEmptyDataIfNotFound = message.returnEmptyDataIfNotFound);
     message.filter !== undefined && (obj.filter = message.filter ? DataFilter.toJSON(message.filter) : undefined);
+    if (message.order) {
+      obj.order = message.order.map((e) => e ? DataOrder.toJSON(e) : undefined);
+    } else {
+      obj.order = [];
+    }
     return obj;
   },
 
@@ -157,6 +176,65 @@ export const GetProjectionDataRequest = {
     message.filter = (object.filter !== undefined && object.filter !== null)
       ? DataFilter.fromPartial(object.filter)
       : undefined;
+    message.order = object.order?.map((e) => DataOrder.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseDataOrder(): DataOrder {
+  return { field: "", descending: false };
+}
+
+export const DataOrder = {
+  encode(message: DataOrder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.field !== "") {
+      writer.uint32(10).string(message.field);
+    }
+    if (message.descending === true) {
+      writer.uint32(16).bool(message.descending);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DataOrder {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDataOrder();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.field = reader.string();
+          break;
+        case 2:
+          message.descending = reader.bool();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DataOrder {
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      descending: isSet(object.descending) ? Boolean(object.descending) : false,
+    };
+  },
+
+  toJSON(message: DataOrder): unknown {
+    const obj: any = {};
+    message.field !== undefined && (obj.field = message.field);
+    message.descending !== undefined && (obj.descending = message.descending);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<DataOrder>): DataOrder {
+    const message = createBaseDataOrder();
+    message.field = object.field ?? "";
+    message.descending = object.descending ?? false;
     return message;
   },
 };
