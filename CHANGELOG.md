@@ -1,3 +1,7 @@
+# v1.0.0-alpha.14
+
+- (bug) Fix `GetProjectionDataListRequest` request
+
 # v1.0.0-alpha.13
 
 - (bc) Extend and refactor delivery api

@@ -19,7 +19,6 @@ export interface GetProjectionDataListRequest {
   page: number;
   filter: DataFilter | undefined;
   order: DataOrder[];
-  returnEmptyDataIfNotFound: boolean;
 }
 
 export interface DataOrder {
@@ -141,15 +140,7 @@ export const GetProjectionDataRequest = {
 };
 
 function createBaseGetProjectionDataListRequest(): GetProjectionDataListRequest {
-  return {
-    projection: "",
-    auth: undefined,
-    limit: 0,
-    page: 0,
-    filter: undefined,
-    order: [],
-    returnEmptyDataIfNotFound: false,
-  };
+  return { projection: "", auth: undefined, limit: 0, page: 0, filter: undefined, order: [] };
 }
 
 export const GetProjectionDataListRequest = {
@@ -171,9 +162,6 @@ export const GetProjectionDataListRequest = {
     }
     for (const v of message.order) {
       DataOrder.encode(v!, writer.uint32(50).fork()).ldelim();
-    }
-    if (message.returnEmptyDataIfNotFound === true) {
-      writer.uint32(56).bool(message.returnEmptyDataIfNotFound);
     }
     return writer;
   },
@@ -203,9 +191,6 @@ export const GetProjectionDataListRequest = {
         case 6:
           message.order.push(DataOrder.decode(reader, reader.uint32()));
           break;
-        case 7:
-          message.returnEmptyDataIfNotFound = reader.bool();
-          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -222,9 +207,6 @@ export const GetProjectionDataListRequest = {
       page: isSet(object.page) ? Number(object.page) : 0,
       filter: isSet(object.filter) ? DataFilter.fromJSON(object.filter) : undefined,
       order: Array.isArray(object?.order) ? object.order.map((e: any) => DataOrder.fromJSON(e)) : [],
-      returnEmptyDataIfNotFound: isSet(object.returnEmptyDataIfNotFound)
-        ? Boolean(object.returnEmptyDataIfNotFound)
-        : false,
     };
   },
 
@@ -240,8 +222,6 @@ export const GetProjectionDataListRequest = {
     } else {
       obj.order = [];
     }
-    message.returnEmptyDataIfNotFound !== undefined &&
-      (obj.returnEmptyDataIfNotFound = message.returnEmptyDataIfNotFound);
     return obj;
   },
 
@@ -259,7 +239,6 @@ export const GetProjectionDataListRequest = {
       ? DataFilter.fromPartial(object.filter)
       : undefined;
     message.order = object.order?.map((e) => DataOrder.fromPartial(e)) || [];
-    message.returnEmptyDataIfNotFound = object.returnEmptyDataIfNotFound ?? false;
     return message;
   },
 };

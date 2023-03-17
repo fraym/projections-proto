@@ -17,7 +17,6 @@ message GetProjectionDataListRequest {
 	int32 page = 4;
 	DataFilter filter = 5;
 	repeated DataOrder order = 6;
-	bool returnEmptyDataIfNotFound = 7;
 }
 
 message DataOrder {
