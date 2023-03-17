@@ -1,7 +1,12 @@
 syntax = "proto3";
 package delivery;
 import "delivery/get_projection_data.proto";
+import "delivery/upsert_projection_data.proto";
+import "delivery/delete_projection_data.proto";
   
 service ProjectionsService {
 	rpc GetData(GetProjectionDataRequest) returns (GetProjectionDataResponse);
+	rpc GetDataList(GetProjectionDataListRequest) returns (GetProjectionDataListResponse);
+	rpc UpsertData(UpsertProjectionDataRequest) returns (UpsertProjectionDataResponse);
+	rpc DeleteData(DeleteProjectionDataRequest) returns (DeleteProjectionDataResponse);
 }

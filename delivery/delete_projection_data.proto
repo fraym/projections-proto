@@ -1,0 +1,16 @@
+syntax = "proto3";
+package delivery;
+import "delivery/shared.proto";
+
+message DeleteProjectionDataRequest {
+	string projection = 1;
+	AuthData auth = 2;
+	string data_id = 3;
+	DataFilter filter = 4;
+}
+
+message DeleteProjectionDataResponse {
+	int64 numberOfDeletedEntries = 1;
+}
+
+

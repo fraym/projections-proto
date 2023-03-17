@@ -1,15 +1,23 @@
 syntax = "proto3";
 package delivery;
+import "delivery/shared.proto";
 
 message GetProjectionDataRequest {
 	string projection = 1;
-	string tenant_id = 2;
+	AuthData auth = 2;
 	string data_id = 3;
-	int32 limit = 4;
-	int32 page = 5;
-	bool returnEmptyDataIfNotFound = 6;
-	DataFilter filter = 7;
-	repeated DataOrder order = 8;
+	DataFilter filter = 4;
+	bool returnEmptyDataIfNotFound = 5;
+}
+
+message GetProjectionDataListRequest {
+	string projection = 1;
+	AuthData auth = 2;
+	int32 limit = 3;
+	int32 page = 4;
+	DataFilter filter = 5;
+	repeated DataOrder order = 6;
+	bool returnEmptyDataIfNotFound = 7;
 }
 
 message DataOrder {
@@ -17,23 +25,15 @@ message DataOrder {
 	bool descending = 2;
 }
 
-message DataFilter {
-	map<string, DataFieldFilter> fields = 1;
-	repeated DataFilter and = 2;
-	repeated DataFilter or = 3;
-}
-
-message DataFieldFilter {
-	string type = 1;
-	string operation = 2;
-	string value = 3;
-}
-
 message ProjectionData {
 	map<string, string> data = 1;
 }
 
 message GetProjectionDataResponse {
+	ProjectionData result = 1;
+}
+
+message GetProjectionDataListResponse {
 	repeated ProjectionData result = 1;
 	int32 limit = 2;
 	int32 page = 3;

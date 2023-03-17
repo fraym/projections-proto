@@ -43,6 +43,10 @@ export const GetProjectionsRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<GetProjectionsRequest>, I>>(base?: I): GetProjectionsRequest {
+    return GetProjectionsRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<GetProjectionsRequest>, I>>(_: I): GetProjectionsRequest {
     const message = createBaseGetProjectionsRequest();
     return message;
@@ -93,6 +97,10 @@ export const GetProjectionsResponse = {
       obj.projectionNames = [];
     }
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetProjectionsResponse>, I>>(base?: I): GetProjectionsResponse {
+    return GetProjectionsResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<GetProjectionsResponse>, I>>(object: I): GetProjectionsResponse {

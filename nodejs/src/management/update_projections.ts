@@ -50,6 +50,10 @@ export const UpdateProjectionsRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<UpdateProjectionsRequest>, I>>(base?: I): UpdateProjectionsRequest {
+    return UpdateProjectionsRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<UpdateProjectionsRequest>, I>>(object: I): UpdateProjectionsRequest {
     const message = createBaseUpdateProjectionsRequest();
     message.schema = object.schema ?? "";
@@ -88,6 +92,10 @@ export const UpdateProjectionsResponse = {
   toJSON(_: UpdateProjectionsResponse): unknown {
     const obj: any = {};
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdateProjectionsResponse>, I>>(base?: I): UpdateProjectionsResponse {
+    return UpdateProjectionsResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<UpdateProjectionsResponse>, I>>(_: I): UpdateProjectionsResponse {

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package delivery;
+
+message AuthData {
+	string tenant_id = 1;
+	repeated string scopes = 2;
+	map<string, string> data = 3;
+}
+
+message DataFilter {
+	map<string, DataFieldFilter> fields = 1;
+	repeated DataFilter and = 2;
+	repeated DataFilter or = 3;
+}
+
+message DataFieldFilter {
+	string type = 1;
+	string operation = 2;
+	string value = 3;
+}

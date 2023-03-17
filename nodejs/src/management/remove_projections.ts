@@ -56,6 +56,10 @@ export const RemoveProjectionsRequest = {
     return obj;
   },
 
+  create<I extends Exact<DeepPartial<RemoveProjectionsRequest>, I>>(base?: I): RemoveProjectionsRequest {
+    return RemoveProjectionsRequest.fromPartial(base ?? {});
+  },
+
   fromPartial<I extends Exact<DeepPartial<RemoveProjectionsRequest>, I>>(object: I): RemoveProjectionsRequest {
     const message = createBaseRemoveProjectionsRequest();
     message.projectionNames = object.projectionNames?.map((e) => e) || [];
@@ -94,6 +98,10 @@ export const RemoveProjectionsResponse = {
   toJSON(_: RemoveProjectionsResponse): unknown {
     const obj: any = {};
     return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RemoveProjectionsResponse>, I>>(base?: I): RemoveProjectionsResponse {
+    return RemoveProjectionsResponse.fromPartial(base ?? {});
   },
 
   fromPartial<I extends Exact<DeepPartial<RemoveProjectionsResponse>, I>>(_: I): RemoveProjectionsResponse {

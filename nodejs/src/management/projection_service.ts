@@ -2,8 +2,8 @@
 import {
   CallOptions,
   ChannelCredentials,
-  ChannelOptions,
   Client,
+  ClientOptions,
   ClientUnaryCall,
   handleUnaryCall,
   makeGenericClientConstructor,
@@ -135,6 +135,6 @@ export const ProjectionsServiceClient = makeGenericClientConstructor(
   ProjectionsServiceService,
   "management.ProjectionsService",
 ) as unknown as {
-  new (address: string, credentials: ChannelCredentials, options?: Partial<ChannelOptions>): ProjectionsServiceClient;
+  new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): ProjectionsServiceClient;
   service: typeof ProjectionsServiceService;
 };

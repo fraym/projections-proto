@@ -5,16 +5,36 @@ export {
 } from "./delivery/projection_service";
 
 export {
-    ProjectionData,
-    ProjectionData_DataEntry,
-    DeepPartial,
-    GetProjectionDataRequest,
-    GetProjectionDataResponse,
+    AuthData,
+    AuthData_DataEntry,
+    DataFieldFilter,
     DataFilter,
     DataFilter_FieldsEntry,
-    DataFieldFilter,
+    DeepPartial,
+} from "./delivery/shared";
+
+export {
+    ProjectionData,
+    ProjectionData_DataEntry,
+    GetProjectionDataRequest,
+    GetProjectionDataResponse,
+    GetProjectionDataListRequest,
+    GetProjectionDataListResponse,
     DataOrder,
 } from "./delivery/get_projection_data";
+
+export {
+    UpsertProjectionDataRequest,
+    UpsertProjectionDataRequest_PayloadEntry,
+    UpsertProjectionDataResponse,
+    UpsertProjectionDataResponse_FieldValidationErrorsEntry,
+    UpsertProjectionDataResponse_NewDataEntry,
+} from "./delivery/upsert_projection_data";
+
+export {
+    DeleteProjectionDataRequest,
+    DeleteProjectionDataResponse,
+} from "./delivery/delete_projection_data";
 
 export {
     ProjectionsServiceClient as ManagementServiceClient,

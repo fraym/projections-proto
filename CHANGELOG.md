@@ -1,3 +1,7 @@
+# v1.0.0-alpha.13
+
+- (bc) Extend and refactor delivery api
+
 # v1.0.0-alpha.12
 
 - (feature) Add `DataOrder` to `GetProjectionDataRequest`
