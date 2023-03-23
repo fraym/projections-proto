@@ -1,3 +1,8 @@
+# v1.0.0-alpha.15
+
+- (feature) Add numer of total items to pagination data
+- (bc) Use int64 instead of int32 for pagination
+
 # v1.0.0-alpha.14
 
 - (bug) Fix `GetProjectionDataListRequest` request

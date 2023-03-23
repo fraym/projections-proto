@@ -1,4 +1,5 @@
 /* eslint-disable */
+import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { AuthData, DataFilter } from "./shared";
 
@@ -43,6 +44,7 @@ export interface GetProjectionDataListResponse {
   result: ProjectionData[];
   limit: number;
   page: number;
+  total: number;
 }
 
 function createBaseGetProjectionDataRequest(): GetProjectionDataRequest {
@@ -152,10 +154,10 @@ export const GetProjectionDataListRequest = {
       AuthData.encode(message.auth, writer.uint32(18).fork()).ldelim();
     }
     if (message.limit !== 0) {
-      writer.uint32(24).int32(message.limit);
+      writer.uint32(24).int64(message.limit);
     }
     if (message.page !== 0) {
-      writer.uint32(32).int32(message.page);
+      writer.uint32(32).int64(message.page);
     }
     if (message.filter !== undefined) {
       DataFilter.encode(message.filter, writer.uint32(42).fork()).ldelim();
@@ -180,10 +182,10 @@ export const GetProjectionDataListRequest = {
           message.auth = AuthData.decode(reader, reader.uint32());
           break;
         case 3:
-          message.limit = reader.int32();
+          message.limit = longToNumber(reader.int64() as Long);
           break;
         case 4:
-          message.page = reader.int32();
+          message.page = longToNumber(reader.int64() as Long);
           break;
         case 5:
           message.filter = DataFilter.decode(reader, reader.uint32());
@@ -489,7 +491,7 @@ export const GetProjectionDataResponse = {
 };
 
 function createBaseGetProjectionDataListResponse(): GetProjectionDataListResponse {
-  return { result: [], limit: 0, page: 0 };
+  return { result: [], limit: 0, page: 0, total: 0 };
 }
 
 export const GetProjectionDataListResponse = {
@@ -498,10 +500,13 @@ export const GetProjectionDataListResponse = {
       ProjectionData.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.limit !== 0) {
-      writer.uint32(16).int32(message.limit);
+      writer.uint32(16).int64(message.limit);
     }
     if (message.page !== 0) {
-      writer.uint32(24).int32(message.page);
+      writer.uint32(24).int64(message.page);
+    }
+    if (message.total !== 0) {
+      writer.uint32(32).int64(message.total);
     }
     return writer;
   },
@@ -517,10 +522,13 @@ export const GetProjectionDataListResponse = {
           message.result.push(ProjectionData.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.limit = reader.int32();
+          message.limit = longToNumber(reader.int64() as Long);
           break;
         case 3:
-          message.page = reader.int32();
+          message.page = longToNumber(reader.int64() as Long);
+          break;
+        case 4:
+          message.total = longToNumber(reader.int64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -535,6 +543,7 @@ export const GetProjectionDataListResponse = {
       result: Array.isArray(object?.result) ? object.result.map((e: any) => ProjectionData.fromJSON(e)) : [],
       limit: isSet(object.limit) ? Number(object.limit) : 0,
       page: isSet(object.page) ? Number(object.page) : 0,
+      total: isSet(object.total) ? Number(object.total) : 0,
     };
   },
 
@@ -547,6 +556,7 @@ export const GetProjectionDataListResponse = {
     }
     message.limit !== undefined && (obj.limit = Math.round(message.limit));
     message.page !== undefined && (obj.page = Math.round(message.page));
+    message.total !== undefined && (obj.total = Math.round(message.total));
     return obj;
   },
 
@@ -559,9 +569,29 @@ export const GetProjectionDataListResponse = {
     message.result = object.result?.map((e) => ProjectionData.fromPartial(e)) || [];
     message.limit = object.limit ?? 0;
     message.page = object.page ?? 0;
+    message.total = object.total ?? 0;
     return message;
   },
 };
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
+})();
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
@@ -570,6 +600,18 @@ export type DeepPartial<T> = T extends Builtin ? T
   : T extends { $case: string } ? { [K in keyof Omit<T, "$case">]?: DeepPartial<T[K]> } & { $case: T["$case"] }
   : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+function longToNumber(long: Long): number {
+  if (long.gt(Number.MAX_SAFE_INTEGER)) {
+    throw new tsProtoGlobalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
 
 function isObject(value: any): boolean {
   return typeof value === "object" && value !== null;

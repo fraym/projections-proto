@@ -13,8 +13,8 @@ message GetProjectionDataRequest {
 message GetProjectionDataListRequest {
 	string projection = 1;
 	AuthData auth = 2;
-	int32 limit = 3;
-	int32 page = 4;
+	int64 limit = 3;
+	int64 page = 4;
 	DataFilter filter = 5;
 	repeated DataOrder order = 6;
 }
@@ -34,6 +34,7 @@ message GetProjectionDataResponse {
 
 message GetProjectionDataListResponse {
 	repeated ProjectionData result = 1;
-	int32 limit = 2;
-	int32 page = 3;
+	int64 limit = 2;
+	int64 page = 3;
+	int64 total = 4;
 }
