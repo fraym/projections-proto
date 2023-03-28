@@ -1,3 +1,7 @@
+# v1.0.0-alpha.16
+
+- (feature) Specify correlation and causation ids
+
 # v1.0.0-alpha.15
 
 - (feature) Add numer of total items to pagination data

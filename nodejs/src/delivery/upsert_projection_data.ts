@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { AuthData } from "./shared";
+import { AuthData, EventMetadata } from "./shared";
 
 export const protobufPackage = "delivery";
 
@@ -9,6 +9,7 @@ export interface UpsertProjectionDataRequest {
   auth: AuthData | undefined;
   dataId: string;
   payload: { [key: string]: string };
+  eventMetadata: EventMetadata | undefined;
 }
 
 export interface UpsertProjectionDataRequest_PayloadEntry {
@@ -33,7 +34,7 @@ export interface UpsertProjectionDataResponse_FieldValidationErrorsEntry {
 }
 
 function createBaseUpsertProjectionDataRequest(): UpsertProjectionDataRequest {
-  return { projection: "", auth: undefined, dataId: "", payload: {} };
+  return { projection: "", auth: undefined, dataId: "", payload: {}, eventMetadata: undefined };
 }
 
 export const UpsertProjectionDataRequest = {
@@ -50,6 +51,9 @@ export const UpsertProjectionDataRequest = {
     Object.entries(message.payload).forEach(([key, value]) => {
       UpsertProjectionDataRequest_PayloadEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
     });
+    if (message.eventMetadata !== undefined) {
+      EventMetadata.encode(message.eventMetadata, writer.uint32(42).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -75,6 +79,9 @@ export const UpsertProjectionDataRequest = {
             message.payload[entry4.key] = entry4.value;
           }
           break;
+        case 5:
+          message.eventMetadata = EventMetadata.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -94,6 +101,7 @@ export const UpsertProjectionDataRequest = {
           return acc;
         }, {})
         : {},
+      eventMetadata: isSet(object.eventMetadata) ? EventMetadata.fromJSON(object.eventMetadata) : undefined,
     };
   },
 
@@ -108,6 +116,8 @@ export const UpsertProjectionDataRequest = {
         obj.payload[k] = v;
       });
     }
+    message.eventMetadata !== undefined &&
+      (obj.eventMetadata = message.eventMetadata ? EventMetadata.toJSON(message.eventMetadata) : undefined);
     return obj;
   },
 
@@ -126,6 +136,9 @@ export const UpsertProjectionDataRequest = {
       }
       return acc;
     }, {});
+    message.eventMetadata = (object.eventMetadata !== undefined && object.eventMetadata !== null)
+      ? EventMetadata.fromPartial(object.eventMetadata)
+      : undefined;
     return message;
   },
 };

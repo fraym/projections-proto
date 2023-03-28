@@ -7,6 +7,7 @@ message DeleteProjectionDataRequest {
 	AuthData auth = 2;
 	string data_id = 3;
 	DataFilter filter = 4;
+	EventMetadata eventMetadata = 5;
 }
 
 message DeleteProjectionDataResponse {

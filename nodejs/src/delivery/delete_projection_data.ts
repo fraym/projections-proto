@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { AuthData, DataFilter } from "./shared";
+import { AuthData, DataFilter, EventMetadata } from "./shared";
 
 export const protobufPackage = "delivery";
 
@@ -10,6 +10,7 @@ export interface DeleteProjectionDataRequest {
   auth: AuthData | undefined;
   dataId: string;
   filter: DataFilter | undefined;
+  eventMetadata: EventMetadata | undefined;
 }
 
 export interface DeleteProjectionDataResponse {
@@ -17,7 +18,7 @@ export interface DeleteProjectionDataResponse {
 }
 
 function createBaseDeleteProjectionDataRequest(): DeleteProjectionDataRequest {
-  return { projection: "", auth: undefined, dataId: "", filter: undefined };
+  return { projection: "", auth: undefined, dataId: "", filter: undefined, eventMetadata: undefined };
 }
 
 export const DeleteProjectionDataRequest = {
@@ -33,6 +34,9 @@ export const DeleteProjectionDataRequest = {
     }
     if (message.filter !== undefined) {
       DataFilter.encode(message.filter, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.eventMetadata !== undefined) {
+      EventMetadata.encode(message.eventMetadata, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -56,6 +60,9 @@ export const DeleteProjectionDataRequest = {
         case 4:
           message.filter = DataFilter.decode(reader, reader.uint32());
           break;
+        case 5:
+          message.eventMetadata = EventMetadata.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -70,6 +77,7 @@ export const DeleteProjectionDataRequest = {
       auth: isSet(object.auth) ? AuthData.fromJSON(object.auth) : undefined,
       dataId: isSet(object.dataId) ? String(object.dataId) : "",
       filter: isSet(object.filter) ? DataFilter.fromJSON(object.filter) : undefined,
+      eventMetadata: isSet(object.eventMetadata) ? EventMetadata.fromJSON(object.eventMetadata) : undefined,
     };
   },
 
@@ -79,6 +87,8 @@ export const DeleteProjectionDataRequest = {
     message.auth !== undefined && (obj.auth = message.auth ? AuthData.toJSON(message.auth) : undefined);
     message.dataId !== undefined && (obj.dataId = message.dataId);
     message.filter !== undefined && (obj.filter = message.filter ? DataFilter.toJSON(message.filter) : undefined);
+    message.eventMetadata !== undefined &&
+      (obj.eventMetadata = message.eventMetadata ? EventMetadata.toJSON(message.eventMetadata) : undefined);
     return obj;
   },
 
@@ -93,6 +103,9 @@ export const DeleteProjectionDataRequest = {
     message.dataId = object.dataId ?? "";
     message.filter = (object.filter !== undefined && object.filter !== null)
       ? DataFilter.fromPartial(object.filter)
+      : undefined;
+    message.eventMetadata = (object.eventMetadata !== undefined && object.eventMetadata !== null)
+      ? EventMetadata.fromPartial(object.eventMetadata)
       : undefined;
     return message;
   },

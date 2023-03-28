@@ -31,6 +31,11 @@ export interface DataFieldFilter {
   value: string;
 }
 
+export interface EventMetadata {
+  causationId: string;
+  correlationId: string;
+}
+
 function createBaseAuthData(): AuthData {
   return { tenantId: "", scopes: [], data: {} };
 }
@@ -414,6 +419,68 @@ export const DataFieldFilter = {
     message.type = object.type ?? "";
     message.operation = object.operation ?? "";
     message.value = object.value ?? "";
+    return message;
+  },
+};
+
+function createBaseEventMetadata(): EventMetadata {
+  return { causationId: "", correlationId: "" };
+}
+
+export const EventMetadata = {
+  encode(message: EventMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.causationId !== "") {
+      writer.uint32(10).string(message.causationId);
+    }
+    if (message.correlationId !== "") {
+      writer.uint32(18).string(message.correlationId);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.causationId = reader.string();
+          break;
+        case 2:
+          message.correlationId = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventMetadata {
+    return {
+      causationId: isSet(object.causationId) ? String(object.causationId) : "",
+      correlationId: isSet(object.correlationId) ? String(object.correlationId) : "",
+    };
+  },
+
+  toJSON(message: EventMetadata): unknown {
+    const obj: any = {};
+    message.causationId !== undefined && (obj.causationId = message.causationId);
+    message.correlationId !== undefined && (obj.correlationId = message.correlationId);
+    return obj;
+  },
+
+  create(base?: DeepPartial<EventMetadata>): EventMetadata {
+    return EventMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventMetadata>): EventMetadata {
+    const message = createBaseEventMetadata();
+    message.causationId = object.causationId ?? "";
+    message.correlationId = object.correlationId ?? "";
     return message;
   },
 };

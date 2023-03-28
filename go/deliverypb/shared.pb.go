@@ -209,6 +209,61 @@ func (x *DataFieldFilter) GetValue() string {
 	return ""
 }
 
+type EventMetadata struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CausationId   string `protobuf:"bytes,1,opt,name=causation_id,json=causationId,proto3" json:"causation_id,omitempty"`
+	CorrelationId string `protobuf:"bytes,2,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+}
+
+func (x *EventMetadata) Reset() {
+	*x = EventMetadata{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_delivery_shared_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EventMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EventMetadata) ProtoMessage() {}
+
+func (x *EventMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_delivery_shared_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EventMetadata.ProtoReflect.Descriptor instead.
+func (*EventMetadata) Descriptor() ([]byte, []int) {
+	return file_delivery_shared_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *EventMetadata) GetCausationId() string {
+	if x != nil {
+		return x.CausationId
+	}
+	return ""
+}
+
+func (x *EventMetadata) GetCorrelationId() string {
+	if x != nil {
+		return x.CorrelationId
+	}
+	return ""
+}
+
 var File_delivery_shared_proto protoreflect.FileDescriptor
 
 var file_delivery_shared_proto_rawDesc = []byte{
@@ -245,7 +300,13 @@ var file_delivery_shared_proto_rawDesc = []byte{
 	0x70, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
 	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x59, 0x0a, 0x0d, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x4d,
+	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x21, 0x0a, 0x0c, 0x63, 0x61, 0x75, 0x73, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63,
+	0x61, 0x75, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6f,
+	0x72, 0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0d, 0x63, 0x6f, 0x72, 0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49,
+	0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -260,17 +321,18 @@ func file_delivery_shared_proto_rawDescGZIP() []byte {
 	return file_delivery_shared_proto_rawDescData
 }
 
-var file_delivery_shared_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_delivery_shared_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_delivery_shared_proto_goTypes = []interface{}{
 	(*AuthData)(nil),        // 0: delivery.AuthData
 	(*DataFilter)(nil),      // 1: delivery.DataFilter
 	(*DataFieldFilter)(nil), // 2: delivery.DataFieldFilter
-	nil,                     // 3: delivery.AuthData.DataEntry
-	nil,                     // 4: delivery.DataFilter.FieldsEntry
+	(*EventMetadata)(nil),   // 3: delivery.EventMetadata
+	nil,                     // 4: delivery.AuthData.DataEntry
+	nil,                     // 5: delivery.DataFilter.FieldsEntry
 }
 var file_delivery_shared_proto_depIdxs = []int32{
-	3, // 0: delivery.AuthData.data:type_name -> delivery.AuthData.DataEntry
-	4, // 1: delivery.DataFilter.fields:type_name -> delivery.DataFilter.FieldsEntry
+	4, // 0: delivery.AuthData.data:type_name -> delivery.AuthData.DataEntry
+	5, // 1: delivery.DataFilter.fields:type_name -> delivery.DataFilter.FieldsEntry
 	1, // 2: delivery.DataFilter.and:type_name -> delivery.DataFilter
 	1, // 3: delivery.DataFilter.or:type_name -> delivery.DataFilter
 	2, // 4: delivery.DataFilter.FieldsEntry.value:type_name -> delivery.DataFieldFilter
@@ -323,6 +385,18 @@ func file_delivery_shared_proto_init() {
 				return nil
 			}
 		}
+		file_delivery_shared_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EventMetadata); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -330,7 +404,7 @@ func file_delivery_shared_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_delivery_shared_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -11,6 +11,7 @@ export {
     DataFilter,
     DataFilter_FieldsEntry,
     DeepPartial,
+    EventMetadata,
 } from "./delivery/shared";
 
 export {

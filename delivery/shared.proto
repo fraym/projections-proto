@@ -18,3 +18,8 @@ message DataFieldFilter {
 	string operation = 2;
 	string value = 3;
 }
+
+message EventMetadata {
+	string causation_id = 1;
+	string correlation_id = 2;
+}
