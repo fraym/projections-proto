@@ -19,6 +19,7 @@ export interface UpsertProjectionDataRequest_PayloadEntry {
 
 export interface UpsertProjectionDataResponse {
   newData: { [key: string]: string };
+  id: string;
   validationErrors: string[];
   fieldValidationErrors: { [key: string]: string };
 }
@@ -203,7 +204,7 @@ export const UpsertProjectionDataRequest_PayloadEntry = {
 };
 
 function createBaseUpsertProjectionDataResponse(): UpsertProjectionDataResponse {
-  return { newData: {}, validationErrors: [], fieldValidationErrors: {} };
+  return { newData: {}, id: "", validationErrors: [], fieldValidationErrors: {} };
 }
 
 export const UpsertProjectionDataResponse = {
@@ -211,13 +212,16 @@ export const UpsertProjectionDataResponse = {
     Object.entries(message.newData).forEach(([key, value]) => {
       UpsertProjectionDataResponse_NewDataEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).ldelim();
     });
+    if (message.id !== "") {
+      writer.uint32(18).string(message.id);
+    }
     for (const v of message.validationErrors) {
-      writer.uint32(18).string(v!);
+      writer.uint32(26).string(v!);
     }
     Object.entries(message.fieldValidationErrors).forEach(([key, value]) => {
       UpsertProjectionDataResponse_FieldValidationErrorsEntry.encode(
         { key: key as any, value },
-        writer.uint32(26).fork(),
+        writer.uint32(34).fork(),
       ).ldelim();
     });
     return writer;
@@ -237,12 +241,15 @@ export const UpsertProjectionDataResponse = {
           }
           break;
         case 2:
-          message.validationErrors.push(reader.string());
+          message.id = reader.string();
           break;
         case 3:
-          const entry3 = UpsertProjectionDataResponse_FieldValidationErrorsEntry.decode(reader, reader.uint32());
-          if (entry3.value !== undefined) {
-            message.fieldValidationErrors[entry3.key] = entry3.value;
+          message.validationErrors.push(reader.string());
+          break;
+        case 4:
+          const entry4 = UpsertProjectionDataResponse_FieldValidationErrorsEntry.decode(reader, reader.uint32());
+          if (entry4.value !== undefined) {
+            message.fieldValidationErrors[entry4.key] = entry4.value;
           }
           break;
         default:
@@ -261,6 +268,7 @@ export const UpsertProjectionDataResponse = {
           return acc;
         }, {})
         : {},
+      id: isSet(object.id) ? String(object.id) : "",
       validationErrors: Array.isArray(object?.validationErrors)
         ? object.validationErrors.map((e: any) => String(e))
         : [],
@@ -281,6 +289,7 @@ export const UpsertProjectionDataResponse = {
         obj.newData[k] = v;
       });
     }
+    message.id !== undefined && (obj.id = message.id);
     if (message.validationErrors) {
       obj.validationErrors = message.validationErrors.map((e) => e);
     } else {
@@ -307,6 +316,7 @@ export const UpsertProjectionDataResponse = {
       }
       return acc;
     }, {});
+    message.id = object.id ?? "";
     message.validationErrors = object.validationErrors?.map((e) => e) || [];
     message.fieldValidationErrors = Object.entries(object.fieldValidationErrors ?? {}).reduce<
       { [key: string]: string }

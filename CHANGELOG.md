@@ -1,3 +1,7 @@
+# v1.0.0-alpha.17
+
+- (bug) Return id when upserting data
+
 # v1.0.0-alpha.16
 
 - (feature) Specify correlation and causation ids
