@@ -1,7 +1,7 @@
 {
     "name": "@fraym/projections-proto",
     "version": "1.0.0-alpha.17",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "homepage": "https://github.com/fraym/projections-proto",
     "repository": {
         "type": "git",
