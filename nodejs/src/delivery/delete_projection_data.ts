@@ -42,31 +42,52 @@ export const DeleteProjectionDataRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteProjectionDataRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteProjectionDataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.projection = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.auth = AuthData.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           message.dataId = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag !== 34) {
+            break;
+          }
+
           message.filter = DataFilter.decode(reader, reader.uint32());
-          break;
+          continue;
         case 5:
+          if (tag !== 42) {
+            break;
+          }
+
           message.eventMetadata = EventMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -83,12 +104,21 @@ export const DeleteProjectionDataRequest = {
 
   toJSON(message: DeleteProjectionDataRequest): unknown {
     const obj: any = {};
-    message.projection !== undefined && (obj.projection = message.projection);
-    message.auth !== undefined && (obj.auth = message.auth ? AuthData.toJSON(message.auth) : undefined);
-    message.dataId !== undefined && (obj.dataId = message.dataId);
-    message.filter !== undefined && (obj.filter = message.filter ? DataFilter.toJSON(message.filter) : undefined);
-    message.eventMetadata !== undefined &&
-      (obj.eventMetadata = message.eventMetadata ? EventMetadata.toJSON(message.eventMetadata) : undefined);
+    if (message.projection !== "") {
+      obj.projection = message.projection;
+    }
+    if (message.auth !== undefined) {
+      obj.auth = AuthData.toJSON(message.auth);
+    }
+    if (message.dataId !== "") {
+      obj.dataId = message.dataId;
+    }
+    if (message.filter !== undefined) {
+      obj.filter = DataFilter.toJSON(message.filter);
+    }
+    if (message.eventMetadata !== undefined) {
+      obj.eventMetadata = EventMetadata.toJSON(message.eventMetadata);
+    }
     return obj;
   },
 
@@ -124,19 +154,24 @@ export const DeleteProjectionDataResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DeleteProjectionDataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteProjectionDataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 8) {
+            break;
+          }
+
           message.numberOfDeletedEntries = longToNumber(reader.int64() as Long);
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -147,8 +182,9 @@ export const DeleteProjectionDataResponse = {
 
   toJSON(message: DeleteProjectionDataResponse): unknown {
     const obj: any = {};
-    message.numberOfDeletedEntries !== undefined &&
-      (obj.numberOfDeletedEntries = Math.round(message.numberOfDeletedEntries));
+    if (message.numberOfDeletedEntries !== 0) {
+      obj.numberOfDeletedEntries = Math.round(message.numberOfDeletedEntries);
+    }
     return obj;
   },
 
@@ -163,10 +199,10 @@ export const DeleteProjectionDataResponse = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

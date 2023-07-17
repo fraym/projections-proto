@@ -88,34 +88,59 @@ export const GetProjectionDataRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionDataRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetProjectionDataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.projection = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.auth = AuthData.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           message.dataId = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag !== 34) {
+            break;
+          }
+
           message.filter = DataFilter.decode(reader, reader.uint32());
-          break;
+          continue;
         case 5:
+          if (tag !== 40) {
+            break;
+          }
+
           message.returnEmptyDataIfNotFound = reader.bool();
-          break;
+          continue;
         case 6:
+          if (tag !== 50) {
+            break;
+          }
+
           message.wait = DataWait.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -135,13 +160,24 @@ export const GetProjectionDataRequest = {
 
   toJSON(message: GetProjectionDataRequest): unknown {
     const obj: any = {};
-    message.projection !== undefined && (obj.projection = message.projection);
-    message.auth !== undefined && (obj.auth = message.auth ? AuthData.toJSON(message.auth) : undefined);
-    message.dataId !== undefined && (obj.dataId = message.dataId);
-    message.filter !== undefined && (obj.filter = message.filter ? DataFilter.toJSON(message.filter) : undefined);
-    message.returnEmptyDataIfNotFound !== undefined &&
-      (obj.returnEmptyDataIfNotFound = message.returnEmptyDataIfNotFound);
-    message.wait !== undefined && (obj.wait = message.wait ? DataWait.toJSON(message.wait) : undefined);
+    if (message.projection !== "") {
+      obj.projection = message.projection;
+    }
+    if (message.auth !== undefined) {
+      obj.auth = AuthData.toJSON(message.auth);
+    }
+    if (message.dataId !== "") {
+      obj.dataId = message.dataId;
+    }
+    if (message.filter !== undefined) {
+      obj.filter = DataFilter.toJSON(message.filter);
+    }
+    if (message.returnEmptyDataIfNotFound === true) {
+      obj.returnEmptyDataIfNotFound = message.returnEmptyDataIfNotFound;
+    }
+    if (message.wait !== undefined) {
+      obj.wait = DataWait.toJSON(message.wait);
+    }
     return obj;
   },
 
@@ -191,34 +227,59 @@ export const GetProjectionDataListRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionDataListRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetProjectionDataListRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.projection = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.auth = AuthData.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag !== 24) {
+            break;
+          }
+
           message.limit = longToNumber(reader.int64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag !== 32) {
+            break;
+          }
+
           message.page = longToNumber(reader.int64() as Long);
-          break;
+          continue;
         case 5:
+          if (tag !== 42) {
+            break;
+          }
+
           message.filter = DataFilter.decode(reader, reader.uint32());
-          break;
+          continue;
         case 6:
+          if (tag !== 50) {
+            break;
+          }
+
           message.order.push(DataOrder.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -236,15 +297,23 @@ export const GetProjectionDataListRequest = {
 
   toJSON(message: GetProjectionDataListRequest): unknown {
     const obj: any = {};
-    message.projection !== undefined && (obj.projection = message.projection);
-    message.auth !== undefined && (obj.auth = message.auth ? AuthData.toJSON(message.auth) : undefined);
-    message.limit !== undefined && (obj.limit = Math.round(message.limit));
-    message.page !== undefined && (obj.page = Math.round(message.page));
-    message.filter !== undefined && (obj.filter = message.filter ? DataFilter.toJSON(message.filter) : undefined);
-    if (message.order) {
-      obj.order = message.order.map((e) => e ? DataOrder.toJSON(e) : undefined);
-    } else {
-      obj.order = [];
+    if (message.projection !== "") {
+      obj.projection = message.projection;
+    }
+    if (message.auth !== undefined) {
+      obj.auth = AuthData.toJSON(message.auth);
+    }
+    if (message.limit !== 0) {
+      obj.limit = Math.round(message.limit);
+    }
+    if (message.page !== 0) {
+      obj.page = Math.round(message.page);
+    }
+    if (message.filter !== undefined) {
+      obj.filter = DataFilter.toJSON(message.filter);
+    }
+    if (message.order?.length) {
+      obj.order = message.order.map((e) => DataOrder.toJSON(e));
     }
     return obj;
   },
@@ -283,22 +352,31 @@ export const DataWait = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DataWait {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataWait();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.conditionFilter = DataFilter.decode(reader, reader.uint32());
-          break;
+          continue;
         case 2:
+          if (tag !== 16) {
+            break;
+          }
+
           message.timeout = longToNumber(reader.int64() as Long);
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -312,9 +390,12 @@ export const DataWait = {
 
   toJSON(message: DataWait): unknown {
     const obj: any = {};
-    message.conditionFilter !== undefined &&
-      (obj.conditionFilter = message.conditionFilter ? DataFilter.toJSON(message.conditionFilter) : undefined);
-    message.timeout !== undefined && (obj.timeout = Math.round(message.timeout));
+    if (message.conditionFilter !== undefined) {
+      obj.conditionFilter = DataFilter.toJSON(message.conditionFilter);
+    }
+    if (message.timeout !== 0) {
+      obj.timeout = Math.round(message.timeout);
+    }
     return obj;
   },
 
@@ -348,22 +429,31 @@ export const DataOrder = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DataOrder {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataOrder();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.field = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 16) {
+            break;
+          }
+
           message.descending = reader.bool();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -377,8 +467,12 @@ export const DataOrder = {
 
   toJSON(message: DataOrder): unknown {
     const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.descending !== undefined && (obj.descending = message.descending);
+    if (message.field !== "") {
+      obj.field = message.field;
+    }
+    if (message.descending === true) {
+      obj.descending = message.descending;
+    }
     return obj;
   },
 
@@ -407,22 +501,27 @@ export const ProjectionData = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionData {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProjectionData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           const entry1 = ProjectionData_DataEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.data[entry1.key] = entry1.value;
           }
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -440,11 +539,14 @@ export const ProjectionData = {
 
   toJSON(message: ProjectionData): unknown {
     const obj: any = {};
-    obj.data = {};
     if (message.data) {
-      Object.entries(message.data).forEach(([k, v]) => {
-        obj.data[k] = v;
-      });
+      const entries = Object.entries(message.data);
+      if (entries.length > 0) {
+        obj.data = {};
+        entries.forEach(([k, v]) => {
+          obj.data[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -481,22 +583,31 @@ export const ProjectionData_DataEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionData_DataEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProjectionData_DataEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.value = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -507,8 +618,12 @@ export const ProjectionData_DataEntry = {
 
   toJSON(message: ProjectionData_DataEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 
@@ -537,19 +652,24 @@ export const GetProjectionDataResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionDataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetProjectionDataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.result = ProjectionData.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -560,7 +680,9 @@ export const GetProjectionDataResponse = {
 
   toJSON(message: GetProjectionDataResponse): unknown {
     const obj: any = {};
-    message.result !== undefined && (obj.result = message.result ? ProjectionData.toJSON(message.result) : undefined);
+    if (message.result !== undefined) {
+      obj.result = ProjectionData.toJSON(message.result);
+    }
     return obj;
   },
 
@@ -599,28 +721,45 @@ export const GetProjectionDataListResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionDataListResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetProjectionDataListResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.result.push(ProjectionData.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 2:
+          if (tag !== 16) {
+            break;
+          }
+
           message.limit = longToNumber(reader.int64() as Long);
-          break;
+          continue;
         case 3:
+          if (tag !== 24) {
+            break;
+          }
+
           message.page = longToNumber(reader.int64() as Long);
-          break;
+          continue;
         case 4:
+          if (tag !== 32) {
+            break;
+          }
+
           message.total = longToNumber(reader.int64() as Long);
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -636,14 +775,18 @@ export const GetProjectionDataListResponse = {
 
   toJSON(message: GetProjectionDataListResponse): unknown {
     const obj: any = {};
-    if (message.result) {
-      obj.result = message.result.map((e) => e ? ProjectionData.toJSON(e) : undefined);
-    } else {
-      obj.result = [];
+    if (message.result?.length) {
+      obj.result = message.result.map((e) => ProjectionData.toJSON(e));
     }
-    message.limit !== undefined && (obj.limit = Math.round(message.limit));
-    message.page !== undefined && (obj.page = Math.round(message.page));
-    message.total !== undefined && (obj.total = Math.round(message.total));
+    if (message.limit !== 0) {
+      obj.limit = Math.round(message.limit);
+    }
+    if (message.page !== 0) {
+      obj.page = Math.round(message.page);
+    }
+    if (message.total !== 0) {
+      obj.total = Math.round(message.total);
+    }
     return obj;
   },
 
@@ -661,10 +804,10 @@ export const GetProjectionDataListResponse = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
+declare const self: any | undefined;
+declare const window: any | undefined;
+declare const global: any | undefined;
+const tsProtoGlobalThis: any = (() => {
   if (typeof globalThis !== "undefined") {
     return globalThis;
   }

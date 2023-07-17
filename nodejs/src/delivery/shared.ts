@@ -55,28 +55,41 @@ export const AuthData = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): AuthData {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.tenantId = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.scopes.push(reader.string());
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           const entry3 = AuthData_DataEntry.decode(reader, reader.uint32());
           if (entry3.value !== undefined) {
             message.data[entry3.key] = entry3.value;
           }
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -96,17 +109,20 @@ export const AuthData = {
 
   toJSON(message: AuthData): unknown {
     const obj: any = {};
-    message.tenantId !== undefined && (obj.tenantId = message.tenantId);
-    if (message.scopes) {
-      obj.scopes = message.scopes.map((e) => e);
-    } else {
-      obj.scopes = [];
+    if (message.tenantId !== "") {
+      obj.tenantId = message.tenantId;
     }
-    obj.data = {};
+    if (message.scopes?.length) {
+      obj.scopes = message.scopes;
+    }
     if (message.data) {
-      Object.entries(message.data).forEach(([k, v]) => {
-        obj.data[k] = v;
-      });
+      const entries = Object.entries(message.data);
+      if (entries.length > 0) {
+        obj.data = {};
+        entries.forEach(([k, v]) => {
+          obj.data[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -145,22 +161,31 @@ export const AuthData_DataEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): AuthData_DataEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthData_DataEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.value = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -171,8 +196,12 @@ export const AuthData_DataEntry = {
 
   toJSON(message: AuthData_DataEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 
@@ -207,28 +236,41 @@ export const DataFilter = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DataFilter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataFilter();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           const entry1 = DataFilter_FieldsEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.fields[entry1.key] = entry1.value;
           }
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.and.push(DataFilter.decode(reader, reader.uint32()));
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           message.or.push(DataFilter.decode(reader, reader.uint32()));
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -248,21 +290,20 @@ export const DataFilter = {
 
   toJSON(message: DataFilter): unknown {
     const obj: any = {};
-    obj.fields = {};
     if (message.fields) {
-      Object.entries(message.fields).forEach(([k, v]) => {
-        obj.fields[k] = DataFieldFilter.toJSON(v);
-      });
+      const entries = Object.entries(message.fields);
+      if (entries.length > 0) {
+        obj.fields = {};
+        entries.forEach(([k, v]) => {
+          obj.fields[k] = DataFieldFilter.toJSON(v);
+        });
+      }
     }
-    if (message.and) {
-      obj.and = message.and.map((e) => e ? DataFilter.toJSON(e) : undefined);
-    } else {
-      obj.and = [];
+    if (message.and?.length) {
+      obj.and = message.and.map((e) => DataFilter.toJSON(e));
     }
-    if (message.or) {
-      obj.or = message.or.map((e) => e ? DataFilter.toJSON(e) : undefined);
-    } else {
-      obj.or = [];
+    if (message.or?.length) {
+      obj.or = message.or.map((e) => DataFilter.toJSON(e));
     }
     return obj;
   },
@@ -304,22 +345,31 @@ export const DataFilter_FieldsEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DataFilter_FieldsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataFilter_FieldsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.value = DataFieldFilter.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -333,8 +383,12 @@ export const DataFilter_FieldsEntry = {
 
   toJSON(message: DataFilter_FieldsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? DataFieldFilter.toJSON(message.value) : undefined);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = DataFieldFilter.toJSON(message.value);
+    }
     return obj;
   },
 
@@ -371,25 +425,38 @@ export const DataFieldFilter = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DataFieldFilter {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataFieldFilter();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.type = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.operation = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           message.value = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -404,9 +471,15 @@ export const DataFieldFilter = {
 
   toJSON(message: DataFieldFilter): unknown {
     const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.operation !== undefined && (obj.operation = message.operation);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.type !== "") {
+      obj.type = message.type;
+    }
+    if (message.operation !== "") {
+      obj.operation = message.operation;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 
@@ -439,22 +512,31 @@ export const EventMetadata = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): EventMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventMetadata();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.causationId = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.correlationId = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -468,8 +550,12 @@ export const EventMetadata = {
 
   toJSON(message: EventMetadata): unknown {
     const obj: any = {};
-    message.causationId !== undefined && (obj.causationId = message.causationId);
-    message.correlationId !== undefined && (obj.correlationId = message.correlationId);
+    if (message.causationId !== "") {
+      obj.causationId = message.causationId;
+    }
+    if (message.correlationId !== "") {
+      obj.correlationId = message.correlationId;
+    }
     return obj;
   },
 

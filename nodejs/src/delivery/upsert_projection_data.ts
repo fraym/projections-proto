@@ -59,34 +59,55 @@ export const UpsertProjectionDataRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpsertProjectionDataRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpsertProjectionDataRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.projection = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.auth = AuthData.decode(reader, reader.uint32());
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           message.dataId = reader.string();
-          break;
+          continue;
         case 4:
+          if (tag !== 34) {
+            break;
+          }
+
           const entry4 = UpsertProjectionDataRequest_PayloadEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.payload[entry4.key] = entry4.value;
           }
-          break;
+          continue;
         case 5:
+          if (tag !== 42) {
+            break;
+          }
+
           message.eventMetadata = EventMetadata.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -108,17 +129,27 @@ export const UpsertProjectionDataRequest = {
 
   toJSON(message: UpsertProjectionDataRequest): unknown {
     const obj: any = {};
-    message.projection !== undefined && (obj.projection = message.projection);
-    message.auth !== undefined && (obj.auth = message.auth ? AuthData.toJSON(message.auth) : undefined);
-    message.dataId !== undefined && (obj.dataId = message.dataId);
-    obj.payload = {};
-    if (message.payload) {
-      Object.entries(message.payload).forEach(([k, v]) => {
-        obj.payload[k] = v;
-      });
+    if (message.projection !== "") {
+      obj.projection = message.projection;
     }
-    message.eventMetadata !== undefined &&
-      (obj.eventMetadata = message.eventMetadata ? EventMetadata.toJSON(message.eventMetadata) : undefined);
+    if (message.auth !== undefined) {
+      obj.auth = AuthData.toJSON(message.auth);
+    }
+    if (message.dataId !== "") {
+      obj.dataId = message.dataId;
+    }
+    if (message.payload) {
+      const entries = Object.entries(message.payload);
+      if (entries.length > 0) {
+        obj.payload = {};
+        entries.forEach(([k, v]) => {
+          obj.payload[k] = v;
+        });
+      }
+    }
+    if (message.eventMetadata !== undefined) {
+      obj.eventMetadata = EventMetadata.toJSON(message.eventMetadata);
+    }
     return obj;
   },
 
@@ -160,22 +191,31 @@ export const UpsertProjectionDataRequest_PayloadEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpsertProjectionDataRequest_PayloadEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpsertProjectionDataRequest_PayloadEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.value = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -186,8 +226,12 @@ export const UpsertProjectionDataRequest_PayloadEntry = {
 
   toJSON(message: UpsertProjectionDataRequest_PayloadEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 
@@ -228,34 +272,51 @@ export const UpsertProjectionDataResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpsertProjectionDataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpsertProjectionDataResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           const entry1 = UpsertProjectionDataResponse_NewDataEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
             message.newData[entry1.key] = entry1.value;
           }
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.id = reader.string();
-          break;
+          continue;
         case 3:
+          if (tag !== 26) {
+            break;
+          }
+
           message.validationErrors.push(reader.string());
-          break;
+          continue;
         case 4:
+          if (tag !== 34) {
+            break;
+          }
+
           const entry4 = UpsertProjectionDataResponse_FieldValidationErrorsEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.fieldValidationErrors[entry4.key] = entry4.value;
           }
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -283,23 +344,29 @@ export const UpsertProjectionDataResponse = {
 
   toJSON(message: UpsertProjectionDataResponse): unknown {
     const obj: any = {};
-    obj.newData = {};
     if (message.newData) {
-      Object.entries(message.newData).forEach(([k, v]) => {
-        obj.newData[k] = v;
-      });
+      const entries = Object.entries(message.newData);
+      if (entries.length > 0) {
+        obj.newData = {};
+        entries.forEach(([k, v]) => {
+          obj.newData[k] = v;
+        });
+      }
     }
-    message.id !== undefined && (obj.id = message.id);
-    if (message.validationErrors) {
-      obj.validationErrors = message.validationErrors.map((e) => e);
-    } else {
-      obj.validationErrors = [];
+    if (message.id !== "") {
+      obj.id = message.id;
     }
-    obj.fieldValidationErrors = {};
+    if (message.validationErrors?.length) {
+      obj.validationErrors = message.validationErrors;
+    }
     if (message.fieldValidationErrors) {
-      Object.entries(message.fieldValidationErrors).forEach(([k, v]) => {
-        obj.fieldValidationErrors[k] = v;
-      });
+      const entries = Object.entries(message.fieldValidationErrors);
+      if (entries.length > 0) {
+        obj.fieldValidationErrors = {};
+        entries.forEach(([k, v]) => {
+          obj.fieldValidationErrors[k] = v;
+        });
+      }
     }
     return obj;
   },
@@ -346,22 +413,31 @@ export const UpsertProjectionDataResponse_NewDataEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpsertProjectionDataResponse_NewDataEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpsertProjectionDataResponse_NewDataEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.value = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -372,8 +448,12 @@ export const UpsertProjectionDataResponse_NewDataEntry = {
 
   toJSON(message: UpsertProjectionDataResponse_NewDataEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 
@@ -410,22 +490,31 @@ export const UpsertProjectionDataResponse_FieldValidationErrorsEntry = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): UpsertProjectionDataResponse_FieldValidationErrorsEntry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpsertProjectionDataResponse_FieldValidationErrorsEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.key = reader.string();
-          break;
+          continue;
         case 2:
+          if (tag !== 18) {
+            break;
+          }
+
           message.value = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -436,8 +525,12 @@ export const UpsertProjectionDataResponse_FieldValidationErrorsEntry = {
 
   toJSON(message: UpsertProjectionDataResponse_FieldValidationErrorsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
+    if (message.key !== "") {
+      obj.key = message.key;
+    }
+    if (message.value !== "") {
+      obj.value = message.value;
+    }
     return obj;
   },
 

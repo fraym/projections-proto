@@ -20,16 +20,17 @@ export const GetProjectionsRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetProjectionsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -66,19 +67,24 @@ export const GetProjectionsResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): GetProjectionsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetProjectionsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.projectionNames.push(reader.string());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -91,10 +97,8 @@ export const GetProjectionsResponse = {
 
   toJSON(message: GetProjectionsResponse): unknown {
     const obj: any = {};
-    if (message.projectionNames) {
-      obj.projectionNames = message.projectionNames.map((e) => e);
-    } else {
-      obj.projectionNames = [];
+    if (message.projectionNames?.length) {
+      obj.projectionNames = message.projectionNames;
     }
     return obj;
   },

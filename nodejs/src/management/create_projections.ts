@@ -23,19 +23,24 @@ export const CreateProjectionsRequest = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateProjectionsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateProjectionsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
+          if (tag !== 10) {
+            break;
+          }
+
           message.schema = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
+          continue;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
@@ -46,7 +51,9 @@ export const CreateProjectionsRequest = {
 
   toJSON(message: CreateProjectionsRequest): unknown {
     const obj: any = {};
-    message.schema !== undefined && (obj.schema = message.schema);
+    if (message.schema !== "") {
+      obj.schema = message.schema;
+    }
     return obj;
   },
 
@@ -71,16 +78,17 @@ export const CreateProjectionsResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CreateProjectionsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateProjectionsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
       }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
     }
     return message;
   },
