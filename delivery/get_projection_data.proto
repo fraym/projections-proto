@@ -8,6 +8,7 @@ message GetProjectionDataRequest {
 	string data_id = 3;
 	DataFilter filter = 4;
 	bool returnEmptyDataIfNotFound = 5;
+	DataWait wait = 6;
 }
 
 message GetProjectionDataListRequest {
@@ -17,6 +18,11 @@ message GetProjectionDataListRequest {
 	int64 page = 4;
 	DataFilter filter = 5;
 	repeated DataOrder order = 6;
+}
+
+message DataWait {
+	DataFilter conditionFilter = 1;
+	int64 timeout = 2;
 }
 
 message DataOrder {

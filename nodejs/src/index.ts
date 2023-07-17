@@ -22,6 +22,7 @@ export {
     GetProjectionDataListRequest,
     GetProjectionDataListResponse,
     DataOrder,
+    DataWait,
 } from "./delivery/get_projection_data";
 
 export {

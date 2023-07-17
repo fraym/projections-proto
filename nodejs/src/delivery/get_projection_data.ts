@@ -11,6 +11,7 @@ export interface GetProjectionDataRequest {
   dataId: string;
   filter: DataFilter | undefined;
   returnEmptyDataIfNotFound: boolean;
+  wait: DataWait | undefined;
 }
 
 export interface GetProjectionDataListRequest {
@@ -20,6 +21,11 @@ export interface GetProjectionDataListRequest {
   page: number;
   filter: DataFilter | undefined;
   order: DataOrder[];
+}
+
+export interface DataWait {
+  conditionFilter: DataFilter | undefined;
+  timeout: number;
 }
 
 export interface DataOrder {
@@ -48,7 +54,14 @@ export interface GetProjectionDataListResponse {
 }
 
 function createBaseGetProjectionDataRequest(): GetProjectionDataRequest {
-  return { projection: "", auth: undefined, dataId: "", filter: undefined, returnEmptyDataIfNotFound: false };
+  return {
+    projection: "",
+    auth: undefined,
+    dataId: "",
+    filter: undefined,
+    returnEmptyDataIfNotFound: false,
+    wait: undefined,
+  };
 }
 
 export const GetProjectionDataRequest = {
@@ -67,6 +80,9 @@ export const GetProjectionDataRequest = {
     }
     if (message.returnEmptyDataIfNotFound === true) {
       writer.uint32(40).bool(message.returnEmptyDataIfNotFound);
+    }
+    if (message.wait !== undefined) {
+      DataWait.encode(message.wait, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -93,6 +109,9 @@ export const GetProjectionDataRequest = {
         case 5:
           message.returnEmptyDataIfNotFound = reader.bool();
           break;
+        case 6:
+          message.wait = DataWait.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -110,6 +129,7 @@ export const GetProjectionDataRequest = {
       returnEmptyDataIfNotFound: isSet(object.returnEmptyDataIfNotFound)
         ? Boolean(object.returnEmptyDataIfNotFound)
         : false,
+      wait: isSet(object.wait) ? DataWait.fromJSON(object.wait) : undefined,
     };
   },
 
@@ -121,6 +141,7 @@ export const GetProjectionDataRequest = {
     message.filter !== undefined && (obj.filter = message.filter ? DataFilter.toJSON(message.filter) : undefined);
     message.returnEmptyDataIfNotFound !== undefined &&
       (obj.returnEmptyDataIfNotFound = message.returnEmptyDataIfNotFound);
+    message.wait !== undefined && (obj.wait = message.wait ? DataWait.toJSON(message.wait) : undefined);
     return obj;
   },
 
@@ -137,6 +158,7 @@ export const GetProjectionDataRequest = {
       ? DataFilter.fromPartial(object.filter)
       : undefined;
     message.returnEmptyDataIfNotFound = object.returnEmptyDataIfNotFound ?? false;
+    message.wait = (object.wait !== undefined && object.wait !== null) ? DataWait.fromPartial(object.wait) : undefined;
     return message;
   },
 };
@@ -241,6 +263,71 @@ export const GetProjectionDataListRequest = {
       ? DataFilter.fromPartial(object.filter)
       : undefined;
     message.order = object.order?.map((e) => DataOrder.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseDataWait(): DataWait {
+  return { conditionFilter: undefined, timeout: 0 };
+}
+
+export const DataWait = {
+  encode(message: DataWait, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.conditionFilter !== undefined) {
+      DataFilter.encode(message.conditionFilter, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.timeout !== 0) {
+      writer.uint32(16).int64(message.timeout);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DataWait {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDataWait();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.conditionFilter = DataFilter.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.timeout = longToNumber(reader.int64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DataWait {
+    return {
+      conditionFilter: isSet(object.conditionFilter) ? DataFilter.fromJSON(object.conditionFilter) : undefined,
+      timeout: isSet(object.timeout) ? Number(object.timeout) : 0,
+    };
+  },
+
+  toJSON(message: DataWait): unknown {
+    const obj: any = {};
+    message.conditionFilter !== undefined &&
+      (obj.conditionFilter = message.conditionFilter ? DataFilter.toJSON(message.conditionFilter) : undefined);
+    message.timeout !== undefined && (obj.timeout = Math.round(message.timeout));
+    return obj;
+  },
+
+  create(base?: DeepPartial<DataWait>): DataWait {
+    return DataWait.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<DataWait>): DataWait {
+    const message = createBaseDataWait();
+    message.conditionFilter = (object.conditionFilter !== undefined && object.conditionFilter !== null)
+      ? DataFilter.fromPartial(object.conditionFilter)
+      : undefined;
+    message.timeout = object.timeout ?? 0;
     return message;
   },
 };
