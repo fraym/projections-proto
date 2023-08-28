@@ -1,0 +1,29 @@
+syntax = "proto3";
+package management;
+
+
+message DataTransformationRequest {
+	oneof payload {
+		TransformData init = 1;
+		TransformedData data = 2;
+	}
+}
+
+message TransformData {
+	string crud_type = 1;
+}
+
+
+message DataToTransform {
+	string crud_type = 1;
+	string tenant_id = 2;
+	string id = 3;
+	map<string, string> data = 4;
+}	
+
+message TransformedData {
+	string crud_type = 1;
+	string tenant_id = 2;
+	string id = 3;
+	map<string, string> data = 4;
+}	

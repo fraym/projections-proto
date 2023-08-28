@@ -156,7 +156,6 @@ export const UpsertProjectionDataRequest = {
   create(base?: DeepPartial<UpsertProjectionDataRequest>): UpsertProjectionDataRequest {
     return UpsertProjectionDataRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UpsertProjectionDataRequest>): UpsertProjectionDataRequest {
     const message = createBaseUpsertProjectionDataRequest();
     message.projection = object.projection ?? "";
@@ -238,7 +237,6 @@ export const UpsertProjectionDataRequest_PayloadEntry = {
   create(base?: DeepPartial<UpsertProjectionDataRequest_PayloadEntry>): UpsertProjectionDataRequest_PayloadEntry {
     return UpsertProjectionDataRequest_PayloadEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UpsertProjectionDataRequest_PayloadEntry>): UpsertProjectionDataRequest_PayloadEntry {
     const message = createBaseUpsertProjectionDataRequest_PayloadEntry();
     message.key = object.key ?? "";
@@ -374,7 +372,6 @@ export const UpsertProjectionDataResponse = {
   create(base?: DeepPartial<UpsertProjectionDataResponse>): UpsertProjectionDataResponse {
     return UpsertProjectionDataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<UpsertProjectionDataResponse>): UpsertProjectionDataResponse {
     const message = createBaseUpsertProjectionDataResponse();
     message.newData = Object.entries(object.newData ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
@@ -460,7 +457,6 @@ export const UpsertProjectionDataResponse_NewDataEntry = {
   create(base?: DeepPartial<UpsertProjectionDataResponse_NewDataEntry>): UpsertProjectionDataResponse_NewDataEntry {
     return UpsertProjectionDataResponse_NewDataEntry.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<UpsertProjectionDataResponse_NewDataEntry>,
   ): UpsertProjectionDataResponse_NewDataEntry {
@@ -539,7 +535,6 @@ export const UpsertProjectionDataResponse_FieldValidationErrorsEntry = {
   ): UpsertProjectionDataResponse_FieldValidationErrorsEntry {
     return UpsertProjectionDataResponse_FieldValidationErrorsEntry.fromPartial(base ?? {});
   },
-
   fromPartial(
     object: DeepPartial<UpsertProjectionDataResponse_FieldValidationErrorsEntry>,
   ): UpsertProjectionDataResponse_FieldValidationErrorsEntry {

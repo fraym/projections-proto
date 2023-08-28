@@ -184,7 +184,6 @@ export const GetProjectionDataRequest = {
   create(base?: DeepPartial<GetProjectionDataRequest>): GetProjectionDataRequest {
     return GetProjectionDataRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetProjectionDataRequest>): GetProjectionDataRequest {
     const message = createBaseGetProjectionDataRequest();
     message.projection = object.projection ?? "";
@@ -321,7 +320,6 @@ export const GetProjectionDataListRequest = {
   create(base?: DeepPartial<GetProjectionDataListRequest>): GetProjectionDataListRequest {
     return GetProjectionDataListRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetProjectionDataListRequest>): GetProjectionDataListRequest {
     const message = createBaseGetProjectionDataListRequest();
     message.projection = object.projection ?? "";
@@ -402,7 +400,6 @@ export const DataWait = {
   create(base?: DeepPartial<DataWait>): DataWait {
     return DataWait.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DataWait>): DataWait {
     const message = createBaseDataWait();
     message.conditionFilter = (object.conditionFilter !== undefined && object.conditionFilter !== null)
@@ -479,7 +476,6 @@ export const DataOrder = {
   create(base?: DeepPartial<DataOrder>): DataOrder {
     return DataOrder.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DataOrder>): DataOrder {
     const message = createBaseDataOrder();
     message.field = object.field ?? "";
@@ -554,7 +550,6 @@ export const ProjectionData = {
   create(base?: DeepPartial<ProjectionData>): ProjectionData {
     return ProjectionData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProjectionData>): ProjectionData {
     const message = createBaseProjectionData();
     message.data = Object.entries(object.data ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
@@ -630,7 +625,6 @@ export const ProjectionData_DataEntry = {
   create(base?: DeepPartial<ProjectionData_DataEntry>): ProjectionData_DataEntry {
     return ProjectionData_DataEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<ProjectionData_DataEntry>): ProjectionData_DataEntry {
     const message = createBaseProjectionData_DataEntry();
     message.key = object.key ?? "";
@@ -689,7 +683,6 @@ export const GetProjectionDataResponse = {
   create(base?: DeepPartial<GetProjectionDataResponse>): GetProjectionDataResponse {
     return GetProjectionDataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetProjectionDataResponse>): GetProjectionDataResponse {
     const message = createBaseGetProjectionDataResponse();
     message.result = (object.result !== undefined && object.result !== null)
@@ -793,7 +786,6 @@ export const GetProjectionDataListResponse = {
   create(base?: DeepPartial<GetProjectionDataListResponse>): GetProjectionDataListResponse {
     return GetProjectionDataListResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<GetProjectionDataListResponse>): GetProjectionDataListResponse {
     const message = createBaseGetProjectionDataListResponse();
     message.result = object.result?.map((e) => ProjectionData.fromPartial(e)) || [];

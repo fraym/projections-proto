@@ -1,0 +1,71 @@
+syntax = "proto3";
+package management;
+
+message EnumType {
+	string name = 1;
+	repeated string values = 2;
+}
+
+message ProjectionType {
+	string name = 1;
+	repeated TypeDirective directives = 2;
+	repeated TypeField fields = 3;
+}
+
+message CrudType {
+	string name = 1;
+	repeated TypeDirective directives = 2;
+	repeated TypeField fields = 3;
+}
+
+message NestedType {
+	string name = 1;
+	repeated TypeDirective directives = 2;
+	repeated TypeField fields = 3;
+}
+
+message TypeField {
+	string name = 1;
+    repeated string type = 2;
+	repeated TypeDirective directives = 3;
+}
+
+message TypeDirective {
+	string name = 1;
+	repeated TypeArgument arguments = 2;
+}
+
+message TypeArgument {
+	string name = 1;
+	string value = 2;
+}
+
+message RegisterMigrationRequest {
+    bool dangerouslyRemoveGdprFields = 1;
+    repeated ProjectionType projectionTypes = 2;
+    repeated CrudType crudTypes = 3;
+    repeated EnumType enums = 4;
+    repeated NestedType nestedTypes = 5;
+}
+
+message RegisterMigrationResponse {}
+
+message StartMigrationRequest {}
+
+message StartMigrationResponse {}
+
+message FinishMigrationRequest {}
+
+message FinishMigrationResponse {}
+
+message RollbackMigrationRequest {}
+
+message RollbackMigrationResponse {}
+
+message GetMigrationStatusRequest {}
+
+message GetMigrationStatusResponse {
+	bool started = 1;
+	bool done = 2;
+}
+

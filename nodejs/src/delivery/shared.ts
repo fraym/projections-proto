@@ -130,7 +130,6 @@ export const AuthData = {
   create(base?: DeepPartial<AuthData>): AuthData {
     return AuthData.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AuthData>): AuthData {
     const message = createBaseAuthData();
     message.tenantId = object.tenantId ?? "";
@@ -208,7 +207,6 @@ export const AuthData_DataEntry = {
   create(base?: DeepPartial<AuthData_DataEntry>): AuthData_DataEntry {
     return AuthData_DataEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<AuthData_DataEntry>): AuthData_DataEntry {
     const message = createBaseAuthData_DataEntry();
     message.key = object.key ?? "";
@@ -311,7 +309,6 @@ export const DataFilter = {
   create(base?: DeepPartial<DataFilter>): DataFilter {
     return DataFilter.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DataFilter>): DataFilter {
     const message = createBaseDataFilter();
     message.fields = Object.entries(object.fields ?? {}).reduce<{ [key: string]: DataFieldFilter }>(
@@ -395,7 +392,6 @@ export const DataFilter_FieldsEntry = {
   create(base?: DeepPartial<DataFilter_FieldsEntry>): DataFilter_FieldsEntry {
     return DataFilter_FieldsEntry.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DataFilter_FieldsEntry>): DataFilter_FieldsEntry {
     const message = createBaseDataFilter_FieldsEntry();
     message.key = object.key ?? "";
@@ -486,7 +482,6 @@ export const DataFieldFilter = {
   create(base?: DeepPartial<DataFieldFilter>): DataFieldFilter {
     return DataFieldFilter.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DataFieldFilter>): DataFieldFilter {
     const message = createBaseDataFieldFilter();
     message.type = object.type ?? "";
@@ -562,7 +557,6 @@ export const EventMetadata = {
   create(base?: DeepPartial<EventMetadata>): EventMetadata {
     return EventMetadata.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<EventMetadata>): EventMetadata {
     const message = createBaseEventMetadata();
     message.causationId = object.causationId ?? "";

@@ -1,8 +1,0 @@
-syntax = "proto3";
-package management;
-
-message RemoveProjectionsRequest {
-	repeated string projection_names = 1;
-}
-
-message RemoveProjectionsResponse {}

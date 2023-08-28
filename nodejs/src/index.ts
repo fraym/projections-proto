@@ -45,18 +45,30 @@ export {
 } from "./management/projection_service";
 
 export {
-    CreateProjectionsRequest,
-    CreateProjectionsResponse,
-} from "./management/create_projections";
+    CrudType,
+    EnumType,
+    FinishMigrationRequest,
+    FinishMigrationResponse,
+    GetMigrationStatusRequest,
+    GetMigrationStatusResponse,
+    NestedType,
+    ProjectionType,
+    RegisterMigrationRequest,
+    RegisterMigrationResponse,
+    RollbackMigrationRequest,
+    RollbackMigrationResponse,
+    StartMigrationRequest,
+    StartMigrationResponse,
+    TypeArgument,
+    TypeDirective,
+    TypeField,
+} from "./management/migration";
 
 export {
-    UpdateProjectionsRequest,
-    UpdateProjectionsResponse,
-} from "./management/update_projections";
-
-export {
-    RemoveProjectionsRequest,
-    RemoveProjectionsResponse,
-} from "./management/remove_projections";
-
-export { GetProjectionsRequest, GetProjectionsResponse } from "./management/get_projections";
+    DataToTransform,
+    DataToTransform_DataEntry,
+    DataTransformationRequest,
+    TransformData,
+    TransformedData,
+    TransformedData_DataEntry,
+} from "./management/data_transformation";

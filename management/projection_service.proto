@@ -1,13 +1,13 @@
 syntax = "proto3";
 package management;
-import "management/create_projections.proto";
-import "management/update_projections.proto";
-import "management/remove_projections.proto";
-import "management/get_projections.proto";
+import "management/migration.proto";
+import "management/data_transformation.proto";
   
 service ProjectionsService {
-	rpc CreateProjections(CreateProjectionsRequest) returns (CreateProjectionsResponse);
-	rpc UpdateProjections(UpdateProjectionsRequest) returns (UpdateProjectionsResponse);
-	rpc RemoveProjections(RemoveProjectionsRequest) returns (RemoveProjectionsResponse);
-	rpc GetProjections(GetProjectionsRequest) returns (GetProjectionsResponse);
+	rpc RegisterMigration(RegisterMigrationRequest) returns (RegisterMigrationResponse); 
+	rpc StartMigration(StartMigrationRequest) returns (StartMigrationResponse); 
+	rpc FinishMigration(FinishMigrationRequest) returns (FinishMigrationResponse);
+	rpc RollbackMigration(RollbackMigrationRequest) returns (RollbackMigrationResponse);
+	rpc GetMigrationStatus(GetMigrationStatusRequest) returns (GetMigrationStatusResponse);
+	rpc DataTransformation(stream DataTransformationRequest) returns (stream DataToTransform);
 }

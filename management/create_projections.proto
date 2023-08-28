@@ -1,8 +1,0 @@
-syntax = "proto3";
-package management;
-
-message CreateProjectionsRequest {
-	string schema = 1;
-}
-
-message CreateProjectionsResponse {}

@@ -125,7 +125,6 @@ export const DeleteProjectionDataRequest = {
   create(base?: DeepPartial<DeleteProjectionDataRequest>): DeleteProjectionDataRequest {
     return DeleteProjectionDataRequest.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DeleteProjectionDataRequest>): DeleteProjectionDataRequest {
     const message = createBaseDeleteProjectionDataRequest();
     message.projection = object.projection ?? "";
@@ -191,7 +190,6 @@ export const DeleteProjectionDataResponse = {
   create(base?: DeepPartial<DeleteProjectionDataResponse>): DeleteProjectionDataResponse {
     return DeleteProjectionDataResponse.fromPartial(base ?? {});
   },
-
   fromPartial(object: DeepPartial<DeleteProjectionDataResponse>): DeleteProjectionDataResponse {
     const message = createBaseDeleteProjectionDataResponse();
     message.numberOfDeletedEntries = object.numberOfDeletedEntries ?? 0;
