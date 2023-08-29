@@ -1,3 +1,7 @@
+# v2.0.2
+
+-   (bug) Fix migration message name conflicts
+
 # v2.0.1
 
 -   (bug) Fix migration proto file name

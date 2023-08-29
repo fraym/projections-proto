@@ -31,11 +31,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProjectionsServiceClient interface {
-	RegisterMigration(ctx context.Context, in *RegisterMigrationRequest, opts ...grpc.CallOption) (*RegisterMigrationResponse, error)
-	StartMigration(ctx context.Context, in *StartMigrationRequest, opts ...grpc.CallOption) (*StartMigrationResponse, error)
-	FinishMigration(ctx context.Context, in *FinishMigrationRequest, opts ...grpc.CallOption) (*FinishMigrationResponse, error)
-	RollbackMigration(ctx context.Context, in *RollbackMigrationRequest, opts ...grpc.CallOption) (*RollbackMigrationResponse, error)
-	GetMigrationStatus(ctx context.Context, in *GetMigrationStatusRequest, opts ...grpc.CallOption) (*GetMigrationStatusResponse, error)
+	RegisterMigration(ctx context.Context, in *ProjectionsRegisterMigrationRequest, opts ...grpc.CallOption) (*ProjectionsRegisterMigrationResponse, error)
+	StartMigration(ctx context.Context, in *ProjectionsStartMigrationRequest, opts ...grpc.CallOption) (*ProjectionsStartMigrationResponse, error)
+	FinishMigration(ctx context.Context, in *ProjectionsFinishMigrationRequest, opts ...grpc.CallOption) (*ProjectionsFinishMigrationResponse, error)
+	RollbackMigration(ctx context.Context, in *ProjectionsRollbackMigrationRequest, opts ...grpc.CallOption) (*ProjectionsRollbackMigrationResponse, error)
+	GetMigrationStatus(ctx context.Context, in *ProjectionsGetMigrationStatusRequest, opts ...grpc.CallOption) (*ProjectionsGetMigrationStatusResponse, error)
 	DataTransformation(ctx context.Context, opts ...grpc.CallOption) (ProjectionsService_DataTransformationClient, error)
 }
 
@@ -47,8 +47,8 @@ func NewProjectionsServiceClient(cc grpc.ClientConnInterface) ProjectionsService
 	return &projectionsServiceClient{cc}
 }
 
-func (c *projectionsServiceClient) RegisterMigration(ctx context.Context, in *RegisterMigrationRequest, opts ...grpc.CallOption) (*RegisterMigrationResponse, error) {
-	out := new(RegisterMigrationResponse)
+func (c *projectionsServiceClient) RegisterMigration(ctx context.Context, in *ProjectionsRegisterMigrationRequest, opts ...grpc.CallOption) (*ProjectionsRegisterMigrationResponse, error) {
+	out := new(ProjectionsRegisterMigrationResponse)
 	err := c.cc.Invoke(ctx, ProjectionsService_RegisterMigration_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -56,8 +56,8 @@ func (c *projectionsServiceClient) RegisterMigration(ctx context.Context, in *Re
 	return out, nil
 }
 
-func (c *projectionsServiceClient) StartMigration(ctx context.Context, in *StartMigrationRequest, opts ...grpc.CallOption) (*StartMigrationResponse, error) {
-	out := new(StartMigrationResponse)
+func (c *projectionsServiceClient) StartMigration(ctx context.Context, in *ProjectionsStartMigrationRequest, opts ...grpc.CallOption) (*ProjectionsStartMigrationResponse, error) {
+	out := new(ProjectionsStartMigrationResponse)
 	err := c.cc.Invoke(ctx, ProjectionsService_StartMigration_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -65,8 +65,8 @@ func (c *projectionsServiceClient) StartMigration(ctx context.Context, in *Start
 	return out, nil
 }
 
-func (c *projectionsServiceClient) FinishMigration(ctx context.Context, in *FinishMigrationRequest, opts ...grpc.CallOption) (*FinishMigrationResponse, error) {
-	out := new(FinishMigrationResponse)
+func (c *projectionsServiceClient) FinishMigration(ctx context.Context, in *ProjectionsFinishMigrationRequest, opts ...grpc.CallOption) (*ProjectionsFinishMigrationResponse, error) {
+	out := new(ProjectionsFinishMigrationResponse)
 	err := c.cc.Invoke(ctx, ProjectionsService_FinishMigration_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -74,8 +74,8 @@ func (c *projectionsServiceClient) FinishMigration(ctx context.Context, in *Fini
 	return out, nil
 }
 
-func (c *projectionsServiceClient) RollbackMigration(ctx context.Context, in *RollbackMigrationRequest, opts ...grpc.CallOption) (*RollbackMigrationResponse, error) {
-	out := new(RollbackMigrationResponse)
+func (c *projectionsServiceClient) RollbackMigration(ctx context.Context, in *ProjectionsRollbackMigrationRequest, opts ...grpc.CallOption) (*ProjectionsRollbackMigrationResponse, error) {
+	out := new(ProjectionsRollbackMigrationResponse)
 	err := c.cc.Invoke(ctx, ProjectionsService_RollbackMigration_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -83,8 +83,8 @@ func (c *projectionsServiceClient) RollbackMigration(ctx context.Context, in *Ro
 	return out, nil
 }
 
-func (c *projectionsServiceClient) GetMigrationStatus(ctx context.Context, in *GetMigrationStatusRequest, opts ...grpc.CallOption) (*GetMigrationStatusResponse, error) {
-	out := new(GetMigrationStatusResponse)
+func (c *projectionsServiceClient) GetMigrationStatus(ctx context.Context, in *ProjectionsGetMigrationStatusRequest, opts ...grpc.CallOption) (*ProjectionsGetMigrationStatusResponse, error) {
+	out := new(ProjectionsGetMigrationStatusResponse)
 	err := c.cc.Invoke(ctx, ProjectionsService_GetMigrationStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -102,8 +102,8 @@ func (c *projectionsServiceClient) DataTransformation(ctx context.Context, opts 
 }
 
 type ProjectionsService_DataTransformationClient interface {
-	Send(*DataTransformationRequest) error
-	Recv() (*DataToTransform, error)
+	Send(*ProjectionsDataTransformationRequest) error
+	Recv() (*ProjectionsDataToTransform, error)
 	grpc.ClientStream
 }
 
@@ -111,12 +111,12 @@ type projectionsServiceDataTransformationClient struct {
 	grpc.ClientStream
 }
 
-func (x *projectionsServiceDataTransformationClient) Send(m *DataTransformationRequest) error {
+func (x *projectionsServiceDataTransformationClient) Send(m *ProjectionsDataTransformationRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *projectionsServiceDataTransformationClient) Recv() (*DataToTransform, error) {
-	m := new(DataToTransform)
+func (x *projectionsServiceDataTransformationClient) Recv() (*ProjectionsDataToTransform, error) {
+	m := new(ProjectionsDataToTransform)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -127,11 +127,11 @@ func (x *projectionsServiceDataTransformationClient) Recv() (*DataToTransform, e
 // All implementations must embed UnimplementedProjectionsServiceServer
 // for forward compatibility
 type ProjectionsServiceServer interface {
-	RegisterMigration(context.Context, *RegisterMigrationRequest) (*RegisterMigrationResponse, error)
-	StartMigration(context.Context, *StartMigrationRequest) (*StartMigrationResponse, error)
-	FinishMigration(context.Context, *FinishMigrationRequest) (*FinishMigrationResponse, error)
-	RollbackMigration(context.Context, *RollbackMigrationRequest) (*RollbackMigrationResponse, error)
-	GetMigrationStatus(context.Context, *GetMigrationStatusRequest) (*GetMigrationStatusResponse, error)
+	RegisterMigration(context.Context, *ProjectionsRegisterMigrationRequest) (*ProjectionsRegisterMigrationResponse, error)
+	StartMigration(context.Context, *ProjectionsStartMigrationRequest) (*ProjectionsStartMigrationResponse, error)
+	FinishMigration(context.Context, *ProjectionsFinishMigrationRequest) (*ProjectionsFinishMigrationResponse, error)
+	RollbackMigration(context.Context, *ProjectionsRollbackMigrationRequest) (*ProjectionsRollbackMigrationResponse, error)
+	GetMigrationStatus(context.Context, *ProjectionsGetMigrationStatusRequest) (*ProjectionsGetMigrationStatusResponse, error)
 	DataTransformation(ProjectionsService_DataTransformationServer) error
 	mustEmbedUnimplementedProjectionsServiceServer()
 }
@@ -140,19 +140,19 @@ type ProjectionsServiceServer interface {
 type UnimplementedProjectionsServiceServer struct {
 }
 
-func (UnimplementedProjectionsServiceServer) RegisterMigration(context.Context, *RegisterMigrationRequest) (*RegisterMigrationResponse, error) {
+func (UnimplementedProjectionsServiceServer) RegisterMigration(context.Context, *ProjectionsRegisterMigrationRequest) (*ProjectionsRegisterMigrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterMigration not implemented")
 }
-func (UnimplementedProjectionsServiceServer) StartMigration(context.Context, *StartMigrationRequest) (*StartMigrationResponse, error) {
+func (UnimplementedProjectionsServiceServer) StartMigration(context.Context, *ProjectionsStartMigrationRequest) (*ProjectionsStartMigrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartMigration not implemented")
 }
-func (UnimplementedProjectionsServiceServer) FinishMigration(context.Context, *FinishMigrationRequest) (*FinishMigrationResponse, error) {
+func (UnimplementedProjectionsServiceServer) FinishMigration(context.Context, *ProjectionsFinishMigrationRequest) (*ProjectionsFinishMigrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FinishMigration not implemented")
 }
-func (UnimplementedProjectionsServiceServer) RollbackMigration(context.Context, *RollbackMigrationRequest) (*RollbackMigrationResponse, error) {
+func (UnimplementedProjectionsServiceServer) RollbackMigration(context.Context, *ProjectionsRollbackMigrationRequest) (*ProjectionsRollbackMigrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RollbackMigration not implemented")
 }
-func (UnimplementedProjectionsServiceServer) GetMigrationStatus(context.Context, *GetMigrationStatusRequest) (*GetMigrationStatusResponse, error) {
+func (UnimplementedProjectionsServiceServer) GetMigrationStatus(context.Context, *ProjectionsGetMigrationStatusRequest) (*ProjectionsGetMigrationStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMigrationStatus not implemented")
 }
 func (UnimplementedProjectionsServiceServer) DataTransformation(ProjectionsService_DataTransformationServer) error {
@@ -172,7 +172,7 @@ func RegisterProjectionsServiceServer(s grpc.ServiceRegistrar, srv ProjectionsSe
 }
 
 func _ProjectionsService_RegisterMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterMigrationRequest)
+	in := new(ProjectionsRegisterMigrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -184,13 +184,13 @@ func _ProjectionsService_RegisterMigration_Handler(srv interface{}, ctx context.
 		FullMethod: ProjectionsService_RegisterMigration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionsServiceServer).RegisterMigration(ctx, req.(*RegisterMigrationRequest))
+		return srv.(ProjectionsServiceServer).RegisterMigration(ctx, req.(*ProjectionsRegisterMigrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectionsService_StartMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartMigrationRequest)
+	in := new(ProjectionsStartMigrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -202,13 +202,13 @@ func _ProjectionsService_StartMigration_Handler(srv interface{}, ctx context.Con
 		FullMethod: ProjectionsService_StartMigration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionsServiceServer).StartMigration(ctx, req.(*StartMigrationRequest))
+		return srv.(ProjectionsServiceServer).StartMigration(ctx, req.(*ProjectionsStartMigrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectionsService_FinishMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FinishMigrationRequest)
+	in := new(ProjectionsFinishMigrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -220,13 +220,13 @@ func _ProjectionsService_FinishMigration_Handler(srv interface{}, ctx context.Co
 		FullMethod: ProjectionsService_FinishMigration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionsServiceServer).FinishMigration(ctx, req.(*FinishMigrationRequest))
+		return srv.(ProjectionsServiceServer).FinishMigration(ctx, req.(*ProjectionsFinishMigrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectionsService_RollbackMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RollbackMigrationRequest)
+	in := new(ProjectionsRollbackMigrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -238,13 +238,13 @@ func _ProjectionsService_RollbackMigration_Handler(srv interface{}, ctx context.
 		FullMethod: ProjectionsService_RollbackMigration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionsServiceServer).RollbackMigration(ctx, req.(*RollbackMigrationRequest))
+		return srv.(ProjectionsServiceServer).RollbackMigration(ctx, req.(*ProjectionsRollbackMigrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _ProjectionsService_GetMigrationStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMigrationStatusRequest)
+	in := new(ProjectionsGetMigrationStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -256,7 +256,7 @@ func _ProjectionsService_GetMigrationStatus_Handler(srv interface{}, ctx context
 		FullMethod: ProjectionsService_GetMigrationStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionsServiceServer).GetMigrationStatus(ctx, req.(*GetMigrationStatusRequest))
+		return srv.(ProjectionsServiceServer).GetMigrationStatus(ctx, req.(*ProjectionsGetMigrationStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -266,8 +266,8 @@ func _ProjectionsService_DataTransformation_Handler(srv interface{}, stream grpc
 }
 
 type ProjectionsService_DataTransformationServer interface {
-	Send(*DataToTransform) error
-	Recv() (*DataTransformationRequest, error)
+	Send(*ProjectionsDataToTransform) error
+	Recv() (*ProjectionsDataTransformationRequest, error)
 	grpc.ServerStream
 }
 
@@ -275,12 +275,12 @@ type projectionsServiceDataTransformationServer struct {
 	grpc.ServerStream
 }
 
-func (x *projectionsServiceDataTransformationServer) Send(m *DataToTransform) error {
+func (x *projectionsServiceDataTransformationServer) Send(m *ProjectionsDataToTransform) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *projectionsServiceDataTransformationServer) Recv() (*DataTransformationRequest, error) {
-	m := new(DataTransformationRequest)
+func (x *projectionsServiceDataTransformationServer) Recv() (*ProjectionsDataTransformationRequest, error) {
+	m := new(ProjectionsDataTransformationRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}

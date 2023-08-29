@@ -2,26 +2,26 @@ syntax = "proto3";
 package management;
 
 
-message DataTransformationRequest {
+message ProjectionsDataTransformationRequest {
 	oneof payload {
-		TransformData init = 1;
-		TransformedData data = 2;
+		ProjectionsTransformData init = 1;
+		ProjectionsTransformedData data = 2;
 	}
 }
 
-message TransformData {
+message ProjectionsTransformData {
 	string crud_type = 1;
 }
 
 
-message DataToTransform {
+message ProjectionsDataToTransform {
 	string crud_type = 1;
 	string tenant_id = 2;
 	string id = 3;
 	map<string, string> data = 4;
 }	
 
-message TransformedData {
+message ProjectionsTransformedData {
 	string crud_type = 1;
 	string tenant_id = 2;
 	string id = 3;

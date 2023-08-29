@@ -1,13 +1,13 @@
 syntax = "proto3";
 package management;
-import "management/projections_migration.proto";
+import "management/migration.proto";
 import "management/data_transformation.proto";
-  
+
 service ProjectionsService {
-	rpc RegisterMigration(RegisterMigrationRequest) returns (RegisterMigrationResponse); 
-	rpc StartMigration(StartMigrationRequest) returns (StartMigrationResponse); 
-	rpc FinishMigration(FinishMigrationRequest) returns (FinishMigrationResponse);
-	rpc RollbackMigration(RollbackMigrationRequest) returns (RollbackMigrationResponse);
-	rpc GetMigrationStatus(GetMigrationStatusRequest) returns (GetMigrationStatusResponse);
-	rpc DataTransformation(stream DataTransformationRequest) returns (stream DataToTransform);
+	rpc RegisterMigration(ProjectionsRegisterMigrationRequest) returns (ProjectionsRegisterMigrationResponse); 
+	rpc StartMigration(ProjectionsStartMigrationRequest) returns (ProjectionsStartMigrationResponse); 
+	rpc FinishMigration(ProjectionsFinishMigrationRequest) returns (ProjectionsFinishMigrationResponse);
+	rpc RollbackMigration(ProjectionsRollbackMigrationRequest) returns (ProjectionsRollbackMigrationResponse);
+	rpc GetMigrationStatus(ProjectionsGetMigrationStatusRequest) returns (ProjectionsGetMigrationStatusResponse);
+	rpc DataTransformation(stream ProjectionsDataTransformationRequest) returns (stream ProjectionsDataToTransform);
 }

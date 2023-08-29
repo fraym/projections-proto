@@ -13,19 +13,19 @@ import {
   ServiceError,
   UntypedServiceImplementation,
 } from "@grpc/grpc-js";
-import { DataToTransform, DataTransformationRequest } from "./data_transformation";
+import { ProjectionsDataToTransform, ProjectionsDataTransformationRequest } from "./data_transformation";
 import {
-  FinishMigrationRequest,
-  FinishMigrationResponse,
-  GetMigrationStatusRequest,
-  GetMigrationStatusResponse,
-  RegisterMigrationRequest,
-  RegisterMigrationResponse,
-  RollbackMigrationRequest,
-  RollbackMigrationResponse,
-  StartMigrationRequest,
-  StartMigrationResponse,
-} from "./projections_migration";
+  ProjectionsFinishMigrationRequest,
+  ProjectionsFinishMigrationResponse,
+  ProjectionsGetMigrationStatusRequest,
+  ProjectionsGetMigrationStatusResponse,
+  ProjectionsRegisterMigrationRequest,
+  ProjectionsRegisterMigrationResponse,
+  ProjectionsRollbackMigrationRequest,
+  ProjectionsRollbackMigrationResponse,
+  ProjectionsStartMigrationRequest,
+  ProjectionsStartMigrationResponse,
+} from "./migration";
 
 export const protobufPackage = "management";
 
@@ -35,154 +35,163 @@ export const ProjectionsServiceService = {
     path: "/management.ProjectionsService/RegisterMigration",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: RegisterMigrationRequest) => Buffer.from(RegisterMigrationRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => RegisterMigrationRequest.decode(value),
-    responseSerialize: (value: RegisterMigrationResponse) =>
-      Buffer.from(RegisterMigrationResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => RegisterMigrationResponse.decode(value),
+    requestSerialize: (value: ProjectionsRegisterMigrationRequest) =>
+      Buffer.from(ProjectionsRegisterMigrationRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => ProjectionsRegisterMigrationRequest.decode(value),
+    responseSerialize: (value: ProjectionsRegisterMigrationResponse) =>
+      Buffer.from(ProjectionsRegisterMigrationResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => ProjectionsRegisterMigrationResponse.decode(value),
   },
   startMigration: {
     path: "/management.ProjectionsService/StartMigration",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: StartMigrationRequest) => Buffer.from(StartMigrationRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => StartMigrationRequest.decode(value),
-    responseSerialize: (value: StartMigrationResponse) => Buffer.from(StartMigrationResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => StartMigrationResponse.decode(value),
+    requestSerialize: (value: ProjectionsStartMigrationRequest) =>
+      Buffer.from(ProjectionsStartMigrationRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => ProjectionsStartMigrationRequest.decode(value),
+    responseSerialize: (value: ProjectionsStartMigrationResponse) =>
+      Buffer.from(ProjectionsStartMigrationResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => ProjectionsStartMigrationResponse.decode(value),
   },
   finishMigration: {
     path: "/management.ProjectionsService/FinishMigration",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: FinishMigrationRequest) => Buffer.from(FinishMigrationRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => FinishMigrationRequest.decode(value),
-    responseSerialize: (value: FinishMigrationResponse) => Buffer.from(FinishMigrationResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => FinishMigrationResponse.decode(value),
+    requestSerialize: (value: ProjectionsFinishMigrationRequest) =>
+      Buffer.from(ProjectionsFinishMigrationRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => ProjectionsFinishMigrationRequest.decode(value),
+    responseSerialize: (value: ProjectionsFinishMigrationResponse) =>
+      Buffer.from(ProjectionsFinishMigrationResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => ProjectionsFinishMigrationResponse.decode(value),
   },
   rollbackMigration: {
     path: "/management.ProjectionsService/RollbackMigration",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: RollbackMigrationRequest) => Buffer.from(RollbackMigrationRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => RollbackMigrationRequest.decode(value),
-    responseSerialize: (value: RollbackMigrationResponse) =>
-      Buffer.from(RollbackMigrationResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => RollbackMigrationResponse.decode(value),
+    requestSerialize: (value: ProjectionsRollbackMigrationRequest) =>
+      Buffer.from(ProjectionsRollbackMigrationRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => ProjectionsRollbackMigrationRequest.decode(value),
+    responseSerialize: (value: ProjectionsRollbackMigrationResponse) =>
+      Buffer.from(ProjectionsRollbackMigrationResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => ProjectionsRollbackMigrationResponse.decode(value),
   },
   getMigrationStatus: {
     path: "/management.ProjectionsService/GetMigrationStatus",
     requestStream: false,
     responseStream: false,
-    requestSerialize: (value: GetMigrationStatusRequest) =>
-      Buffer.from(GetMigrationStatusRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => GetMigrationStatusRequest.decode(value),
-    responseSerialize: (value: GetMigrationStatusResponse) =>
-      Buffer.from(GetMigrationStatusResponse.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => GetMigrationStatusResponse.decode(value),
+    requestSerialize: (value: ProjectionsGetMigrationStatusRequest) =>
+      Buffer.from(ProjectionsGetMigrationStatusRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => ProjectionsGetMigrationStatusRequest.decode(value),
+    responseSerialize: (value: ProjectionsGetMigrationStatusResponse) =>
+      Buffer.from(ProjectionsGetMigrationStatusResponse.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => ProjectionsGetMigrationStatusResponse.decode(value),
   },
   dataTransformation: {
     path: "/management.ProjectionsService/DataTransformation",
     requestStream: true,
     responseStream: true,
-    requestSerialize: (value: DataTransformationRequest) =>
-      Buffer.from(DataTransformationRequest.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => DataTransformationRequest.decode(value),
-    responseSerialize: (value: DataToTransform) => Buffer.from(DataToTransform.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => DataToTransform.decode(value),
+    requestSerialize: (value: ProjectionsDataTransformationRequest) =>
+      Buffer.from(ProjectionsDataTransformationRequest.encode(value).finish()),
+    requestDeserialize: (value: Buffer) => ProjectionsDataTransformationRequest.decode(value),
+    responseSerialize: (value: ProjectionsDataToTransform) =>
+      Buffer.from(ProjectionsDataToTransform.encode(value).finish()),
+    responseDeserialize: (value: Buffer) => ProjectionsDataToTransform.decode(value),
   },
 } as const;
 
 export interface ProjectionsServiceServer extends UntypedServiceImplementation {
-  registerMigration: handleUnaryCall<RegisterMigrationRequest, RegisterMigrationResponse>;
-  startMigration: handleUnaryCall<StartMigrationRequest, StartMigrationResponse>;
-  finishMigration: handleUnaryCall<FinishMigrationRequest, FinishMigrationResponse>;
-  rollbackMigration: handleUnaryCall<RollbackMigrationRequest, RollbackMigrationResponse>;
-  getMigrationStatus: handleUnaryCall<GetMigrationStatusRequest, GetMigrationStatusResponse>;
-  dataTransformation: handleBidiStreamingCall<DataTransformationRequest, DataToTransform>;
+  registerMigration: handleUnaryCall<ProjectionsRegisterMigrationRequest, ProjectionsRegisterMigrationResponse>;
+  startMigration: handleUnaryCall<ProjectionsStartMigrationRequest, ProjectionsStartMigrationResponse>;
+  finishMigration: handleUnaryCall<ProjectionsFinishMigrationRequest, ProjectionsFinishMigrationResponse>;
+  rollbackMigration: handleUnaryCall<ProjectionsRollbackMigrationRequest, ProjectionsRollbackMigrationResponse>;
+  getMigrationStatus: handleUnaryCall<ProjectionsGetMigrationStatusRequest, ProjectionsGetMigrationStatusResponse>;
+  dataTransformation: handleBidiStreamingCall<ProjectionsDataTransformationRequest, ProjectionsDataToTransform>;
 }
 
 export interface ProjectionsServiceClient extends Client {
   registerMigration(
-    request: RegisterMigrationRequest,
-    callback: (error: ServiceError | null, response: RegisterMigrationResponse) => void,
+    request: ProjectionsRegisterMigrationRequest,
+    callback: (error: ServiceError | null, response: ProjectionsRegisterMigrationResponse) => void,
   ): ClientUnaryCall;
   registerMigration(
-    request: RegisterMigrationRequest,
+    request: ProjectionsRegisterMigrationRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: RegisterMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsRegisterMigrationResponse) => void,
   ): ClientUnaryCall;
   registerMigration(
-    request: RegisterMigrationRequest,
+    request: ProjectionsRegisterMigrationRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: RegisterMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsRegisterMigrationResponse) => void,
   ): ClientUnaryCall;
   startMigration(
-    request: StartMigrationRequest,
-    callback: (error: ServiceError | null, response: StartMigrationResponse) => void,
+    request: ProjectionsStartMigrationRequest,
+    callback: (error: ServiceError | null, response: ProjectionsStartMigrationResponse) => void,
   ): ClientUnaryCall;
   startMigration(
-    request: StartMigrationRequest,
+    request: ProjectionsStartMigrationRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: StartMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsStartMigrationResponse) => void,
   ): ClientUnaryCall;
   startMigration(
-    request: StartMigrationRequest,
+    request: ProjectionsStartMigrationRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: StartMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsStartMigrationResponse) => void,
   ): ClientUnaryCall;
   finishMigration(
-    request: FinishMigrationRequest,
-    callback: (error: ServiceError | null, response: FinishMigrationResponse) => void,
+    request: ProjectionsFinishMigrationRequest,
+    callback: (error: ServiceError | null, response: ProjectionsFinishMigrationResponse) => void,
   ): ClientUnaryCall;
   finishMigration(
-    request: FinishMigrationRequest,
+    request: ProjectionsFinishMigrationRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: FinishMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsFinishMigrationResponse) => void,
   ): ClientUnaryCall;
   finishMigration(
-    request: FinishMigrationRequest,
+    request: ProjectionsFinishMigrationRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: FinishMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsFinishMigrationResponse) => void,
   ): ClientUnaryCall;
   rollbackMigration(
-    request: RollbackMigrationRequest,
-    callback: (error: ServiceError | null, response: RollbackMigrationResponse) => void,
+    request: ProjectionsRollbackMigrationRequest,
+    callback: (error: ServiceError | null, response: ProjectionsRollbackMigrationResponse) => void,
   ): ClientUnaryCall;
   rollbackMigration(
-    request: RollbackMigrationRequest,
+    request: ProjectionsRollbackMigrationRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: RollbackMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsRollbackMigrationResponse) => void,
   ): ClientUnaryCall;
   rollbackMigration(
-    request: RollbackMigrationRequest,
+    request: ProjectionsRollbackMigrationRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: RollbackMigrationResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsRollbackMigrationResponse) => void,
   ): ClientUnaryCall;
   getMigrationStatus(
-    request: GetMigrationStatusRequest,
-    callback: (error: ServiceError | null, response: GetMigrationStatusResponse) => void,
+    request: ProjectionsGetMigrationStatusRequest,
+    callback: (error: ServiceError | null, response: ProjectionsGetMigrationStatusResponse) => void,
   ): ClientUnaryCall;
   getMigrationStatus(
-    request: GetMigrationStatusRequest,
+    request: ProjectionsGetMigrationStatusRequest,
     metadata: Metadata,
-    callback: (error: ServiceError | null, response: GetMigrationStatusResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsGetMigrationStatusResponse) => void,
   ): ClientUnaryCall;
   getMigrationStatus(
-    request: GetMigrationStatusRequest,
+    request: ProjectionsGetMigrationStatusRequest,
     metadata: Metadata,
     options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: GetMigrationStatusResponse) => void,
+    callback: (error: ServiceError | null, response: ProjectionsGetMigrationStatusResponse) => void,
   ): ClientUnaryCall;
-  dataTransformation(): ClientDuplexStream<DataTransformationRequest, DataToTransform>;
-  dataTransformation(options: Partial<CallOptions>): ClientDuplexStream<DataTransformationRequest, DataToTransform>;
+  dataTransformation(): ClientDuplexStream<ProjectionsDataTransformationRequest, ProjectionsDataToTransform>;
+  dataTransformation(
+    options: Partial<CallOptions>,
+  ): ClientDuplexStream<ProjectionsDataTransformationRequest, ProjectionsDataToTransform>;
   dataTransformation(
     metadata: Metadata,
     options?: Partial<CallOptions>,
-  ): ClientDuplexStream<DataTransformationRequest, DataToTransform>;
+  ): ClientDuplexStream<ProjectionsDataTransformationRequest, ProjectionsDataToTransform>;
 }
 
 export const ProjectionsServiceClient = makeGenericClientConstructor(

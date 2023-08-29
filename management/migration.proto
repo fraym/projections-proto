@@ -1,0 +1,71 @@
+syntax = "proto3";
+package management;
+
+message ProjectionsEnumType {
+	string name = 1;
+	repeated string values = 2;
+}
+
+message ProjectionsProjectionType {
+	string name = 1;
+	repeated ProjectionsTypeDirective directives = 2;
+	repeated ProjectionsTypeField fields = 3;
+}
+
+message ProjectionsCrudType {
+	string name = 1;
+	repeated ProjectionsTypeDirective directives = 2;
+	repeated ProjectionsTypeField fields = 3;
+}
+
+message ProjectionsNestedType {
+	string name = 1;
+	repeated ProjectionsTypeDirective directives = 2;
+	repeated ProjectionsTypeField fields = 3;
+}
+
+message ProjectionsTypeField {
+	string name = 1;
+    repeated string type = 2;
+	repeated ProjectionsTypeDirective directives = 3;
+}
+
+message ProjectionsTypeDirective {
+	string name = 1;
+	repeated ProjectionsTypeArgument arguments = 2;
+}
+
+message ProjectionsTypeArgument {
+	string name = 1;
+	string value = 2;
+}
+
+message ProjectionsRegisterMigrationRequest {
+    bool dangerouslyRemoveGdprFields = 1;
+    repeated ProjectionsProjectionType projectionTypes = 2;
+    repeated ProjectionsCrudType crudTypes = 3;
+    repeated ProjectionsEnumType enums = 4;
+    repeated ProjectionsNestedType nestedTypes = 5;
+}
+
+message ProjectionsRegisterMigrationResponse {}
+
+message ProjectionsStartMigrationRequest {}
+
+message ProjectionsStartMigrationResponse {}
+
+message ProjectionsFinishMigrationRequest {}
+
+message ProjectionsFinishMigrationResponse {}
+
+message ProjectionsRollbackMigrationRequest {}
+
+message ProjectionsRollbackMigrationResponse {}
+
+message ProjectionsGetMigrationStatusRequest {}
+
+message ProjectionsGetMigrationStatusResponse {
+	bool started = 1;
+	bool done = 2;
+}
+

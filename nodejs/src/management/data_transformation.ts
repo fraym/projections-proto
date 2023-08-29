@@ -3,59 +3,62 @@ import _m0 from "protobufjs/minimal";
 
 export const protobufPackage = "management";
 
-export interface DataTransformationRequest {
-  payload?: { $case: "init"; init: TransformData } | { $case: "data"; data: TransformedData } | undefined;
+export interface ProjectionsDataTransformationRequest {
+  payload?:
+    | { $case: "init"; init: ProjectionsTransformData }
+    | { $case: "data"; data: ProjectionsTransformedData }
+    | undefined;
 }
 
-export interface TransformData {
+export interface ProjectionsTransformData {
   crudType: string;
 }
 
-export interface DataToTransform {
-  crudType: string;
-  tenantId: string;
-  id: string;
-  data: { [key: string]: string };
-}
-
-export interface DataToTransform_DataEntry {
-  key: string;
-  value: string;
-}
-
-export interface TransformedData {
+export interface ProjectionsDataToTransform {
   crudType: string;
   tenantId: string;
   id: string;
   data: { [key: string]: string };
 }
 
-export interface TransformedData_DataEntry {
+export interface ProjectionsDataToTransform_DataEntry {
   key: string;
   value: string;
 }
 
-function createBaseDataTransformationRequest(): DataTransformationRequest {
+export interface ProjectionsTransformedData {
+  crudType: string;
+  tenantId: string;
+  id: string;
+  data: { [key: string]: string };
+}
+
+export interface ProjectionsTransformedData_DataEntry {
+  key: string;
+  value: string;
+}
+
+function createBaseProjectionsDataTransformationRequest(): ProjectionsDataTransformationRequest {
   return { payload: undefined };
 }
 
-export const DataTransformationRequest = {
-  encode(message: DataTransformationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionsDataTransformationRequest = {
+  encode(message: ProjectionsDataTransformationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     switch (message.payload?.$case) {
       case "init":
-        TransformData.encode(message.payload.init, writer.uint32(10).fork()).ldelim();
+        ProjectionsTransformData.encode(message.payload.init, writer.uint32(10).fork()).ldelim();
         break;
       case "data":
-        TransformedData.encode(message.payload.data, writer.uint32(18).fork()).ldelim();
+        ProjectionsTransformedData.encode(message.payload.data, writer.uint32(18).fork()).ldelim();
         break;
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataTransformationRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionsDataTransformationRequest {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDataTransformationRequest();
+    const message = createBaseProjectionsDataTransformationRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -64,14 +67,14 @@ export const DataTransformationRequest = {
             break;
           }
 
-          message.payload = { $case: "init", init: TransformData.decode(reader, reader.uint32()) };
+          message.payload = { $case: "init", init: ProjectionsTransformData.decode(reader, reader.uint32()) };
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.payload = { $case: "data", data: TransformedData.decode(reader, reader.uint32()) };
+          message.payload = { $case: "data", data: ProjectionsTransformedData.decode(reader, reader.uint32()) };
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -82,58 +85,62 @@ export const DataTransformationRequest = {
     return message;
   },
 
-  fromJSON(object: any): DataTransformationRequest {
+  fromJSON(object: any): ProjectionsDataTransformationRequest {
     return {
       payload: isSet(object.init)
-        ? { $case: "init", init: TransformData.fromJSON(object.init) }
+        ? { $case: "init", init: ProjectionsTransformData.fromJSON(object.init) }
         : isSet(object.data)
-        ? { $case: "data", data: TransformedData.fromJSON(object.data) }
+        ? { $case: "data", data: ProjectionsTransformedData.fromJSON(object.data) }
         : undefined,
     };
   },
 
-  toJSON(message: DataTransformationRequest): unknown {
+  toJSON(message: ProjectionsDataTransformationRequest): unknown {
     const obj: any = {};
     if (message.payload?.$case === "init") {
-      obj.init = TransformData.toJSON(message.payload.init);
+      obj.init = ProjectionsTransformData.toJSON(message.payload.init);
     }
     if (message.payload?.$case === "data") {
-      obj.data = TransformedData.toJSON(message.payload.data);
+      obj.data = ProjectionsTransformedData.toJSON(message.payload.data);
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DataTransformationRequest>, I>>(base?: I): DataTransformationRequest {
-    return DataTransformationRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ProjectionsDataTransformationRequest>, I>>(
+    base?: I,
+  ): ProjectionsDataTransformationRequest {
+    return ProjectionsDataTransformationRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DataTransformationRequest>, I>>(object: I): DataTransformationRequest {
-    const message = createBaseDataTransformationRequest();
+  fromPartial<I extends Exact<DeepPartial<ProjectionsDataTransformationRequest>, I>>(
+    object: I,
+  ): ProjectionsDataTransformationRequest {
+    const message = createBaseProjectionsDataTransformationRequest();
     if (object.payload?.$case === "init" && object.payload?.init !== undefined && object.payload?.init !== null) {
-      message.payload = { $case: "init", init: TransformData.fromPartial(object.payload.init) };
+      message.payload = { $case: "init", init: ProjectionsTransformData.fromPartial(object.payload.init) };
     }
     if (object.payload?.$case === "data" && object.payload?.data !== undefined && object.payload?.data !== null) {
-      message.payload = { $case: "data", data: TransformedData.fromPartial(object.payload.data) };
+      message.payload = { $case: "data", data: ProjectionsTransformedData.fromPartial(object.payload.data) };
     }
     return message;
   },
 };
 
-function createBaseTransformData(): TransformData {
+function createBaseProjectionsTransformData(): ProjectionsTransformData {
   return { crudType: "" };
 }
 
-export const TransformData = {
-  encode(message: TransformData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionsTransformData = {
+  encode(message: ProjectionsTransformData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.crudType !== "") {
       writer.uint32(10).string(message.crudType);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TransformData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionsTransformData {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTransformData();
+    const message = createBaseProjectionsTransformData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -153,11 +160,11 @@ export const TransformData = {
     return message;
   },
 
-  fromJSON(object: any): TransformData {
+  fromJSON(object: any): ProjectionsTransformData {
     return { crudType: isSet(object.crudType) ? String(object.crudType) : "" };
   },
 
-  toJSON(message: TransformData): unknown {
+  toJSON(message: ProjectionsTransformData): unknown {
     const obj: any = {};
     if (message.crudType !== "") {
       obj.crudType = message.crudType;
@@ -165,22 +172,22 @@ export const TransformData = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TransformData>, I>>(base?: I): TransformData {
-    return TransformData.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ProjectionsTransformData>, I>>(base?: I): ProjectionsTransformData {
+    return ProjectionsTransformData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TransformData>, I>>(object: I): TransformData {
-    const message = createBaseTransformData();
+  fromPartial<I extends Exact<DeepPartial<ProjectionsTransformData>, I>>(object: I): ProjectionsTransformData {
+    const message = createBaseProjectionsTransformData();
     message.crudType = object.crudType ?? "";
     return message;
   },
 };
 
-function createBaseDataToTransform(): DataToTransform {
+function createBaseProjectionsDataToTransform(): ProjectionsDataToTransform {
   return { crudType: "", tenantId: "", id: "", data: {} };
 }
 
-export const DataToTransform = {
-  encode(message: DataToTransform, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionsDataToTransform = {
+  encode(message: ProjectionsDataToTransform, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.crudType !== "") {
       writer.uint32(10).string(message.crudType);
     }
@@ -191,15 +198,15 @@ export const DataToTransform = {
       writer.uint32(26).string(message.id);
     }
     Object.entries(message.data).forEach(([key, value]) => {
-      DataToTransform_DataEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
+      ProjectionsDataToTransform_DataEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataToTransform {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionsDataToTransform {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDataToTransform();
+    const message = createBaseProjectionsDataToTransform();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -229,7 +236,7 @@ export const DataToTransform = {
             break;
           }
 
-          const entry4 = DataToTransform_DataEntry.decode(reader, reader.uint32());
+          const entry4 = ProjectionsDataToTransform_DataEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.data[entry4.key] = entry4.value;
           }
@@ -243,7 +250,7 @@ export const DataToTransform = {
     return message;
   },
 
-  fromJSON(object: any): DataToTransform {
+  fromJSON(object: any): ProjectionsDataToTransform {
     return {
       crudType: isSet(object.crudType) ? String(object.crudType) : "",
       tenantId: isSet(object.tenantId) ? String(object.tenantId) : "",
@@ -257,7 +264,7 @@ export const DataToTransform = {
     };
   },
 
-  toJSON(message: DataToTransform): unknown {
+  toJSON(message: ProjectionsDataToTransform): unknown {
     const obj: any = {};
     if (message.crudType !== "") {
       obj.crudType = message.crudType;
@@ -280,11 +287,11 @@ export const DataToTransform = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DataToTransform>, I>>(base?: I): DataToTransform {
-    return DataToTransform.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ProjectionsDataToTransform>, I>>(base?: I): ProjectionsDataToTransform {
+    return ProjectionsDataToTransform.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DataToTransform>, I>>(object: I): DataToTransform {
-    const message = createBaseDataToTransform();
+  fromPartial<I extends Exact<DeepPartial<ProjectionsDataToTransform>, I>>(object: I): ProjectionsDataToTransform {
+    const message = createBaseProjectionsDataToTransform();
     message.crudType = object.crudType ?? "";
     message.tenantId = object.tenantId ?? "";
     message.id = object.id ?? "";
@@ -298,12 +305,12 @@ export const DataToTransform = {
   },
 };
 
-function createBaseDataToTransform_DataEntry(): DataToTransform_DataEntry {
+function createBaseProjectionsDataToTransform_DataEntry(): ProjectionsDataToTransform_DataEntry {
   return { key: "", value: "" };
 }
 
-export const DataToTransform_DataEntry = {
-  encode(message: DataToTransform_DataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionsDataToTransform_DataEntry = {
+  encode(message: ProjectionsDataToTransform_DataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -313,10 +320,10 @@ export const DataToTransform_DataEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataToTransform_DataEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionsDataToTransform_DataEntry {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseDataToTransform_DataEntry();
+    const message = createBaseProjectionsDataToTransform_DataEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -343,11 +350,11 @@ export const DataToTransform_DataEntry = {
     return message;
   },
 
-  fromJSON(object: any): DataToTransform_DataEntry {
+  fromJSON(object: any): ProjectionsDataToTransform_DataEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
   },
 
-  toJSON(message: DataToTransform_DataEntry): unknown {
+  toJSON(message: ProjectionsDataToTransform_DataEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
       obj.key = message.key;
@@ -358,23 +365,27 @@ export const DataToTransform_DataEntry = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DataToTransform_DataEntry>, I>>(base?: I): DataToTransform_DataEntry {
-    return DataToTransform_DataEntry.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ProjectionsDataToTransform_DataEntry>, I>>(
+    base?: I,
+  ): ProjectionsDataToTransform_DataEntry {
+    return ProjectionsDataToTransform_DataEntry.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<DataToTransform_DataEntry>, I>>(object: I): DataToTransform_DataEntry {
-    const message = createBaseDataToTransform_DataEntry();
+  fromPartial<I extends Exact<DeepPartial<ProjectionsDataToTransform_DataEntry>, I>>(
+    object: I,
+  ): ProjectionsDataToTransform_DataEntry {
+    const message = createBaseProjectionsDataToTransform_DataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
   },
 };
 
-function createBaseTransformedData(): TransformedData {
+function createBaseProjectionsTransformedData(): ProjectionsTransformedData {
   return { crudType: "", tenantId: "", id: "", data: {} };
 }
 
-export const TransformedData = {
-  encode(message: TransformedData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionsTransformedData = {
+  encode(message: ProjectionsTransformedData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.crudType !== "") {
       writer.uint32(10).string(message.crudType);
     }
@@ -385,15 +396,15 @@ export const TransformedData = {
       writer.uint32(26).string(message.id);
     }
     Object.entries(message.data).forEach(([key, value]) => {
-      TransformedData_DataEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
+      ProjectionsTransformedData_DataEntry.encode({ key: key as any, value }, writer.uint32(34).fork()).ldelim();
     });
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TransformedData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionsTransformedData {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTransformedData();
+    const message = createBaseProjectionsTransformedData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -423,7 +434,7 @@ export const TransformedData = {
             break;
           }
 
-          const entry4 = TransformedData_DataEntry.decode(reader, reader.uint32());
+          const entry4 = ProjectionsTransformedData_DataEntry.decode(reader, reader.uint32());
           if (entry4.value !== undefined) {
             message.data[entry4.key] = entry4.value;
           }
@@ -437,7 +448,7 @@ export const TransformedData = {
     return message;
   },
 
-  fromJSON(object: any): TransformedData {
+  fromJSON(object: any): ProjectionsTransformedData {
     return {
       crudType: isSet(object.crudType) ? String(object.crudType) : "",
       tenantId: isSet(object.tenantId) ? String(object.tenantId) : "",
@@ -451,7 +462,7 @@ export const TransformedData = {
     };
   },
 
-  toJSON(message: TransformedData): unknown {
+  toJSON(message: ProjectionsTransformedData): unknown {
     const obj: any = {};
     if (message.crudType !== "") {
       obj.crudType = message.crudType;
@@ -474,11 +485,11 @@ export const TransformedData = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TransformedData>, I>>(base?: I): TransformedData {
-    return TransformedData.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ProjectionsTransformedData>, I>>(base?: I): ProjectionsTransformedData {
+    return ProjectionsTransformedData.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TransformedData>, I>>(object: I): TransformedData {
-    const message = createBaseTransformedData();
+  fromPartial<I extends Exact<DeepPartial<ProjectionsTransformedData>, I>>(object: I): ProjectionsTransformedData {
+    const message = createBaseProjectionsTransformedData();
     message.crudType = object.crudType ?? "";
     message.tenantId = object.tenantId ?? "";
     message.id = object.id ?? "";
@@ -492,12 +503,12 @@ export const TransformedData = {
   },
 };
 
-function createBaseTransformedData_DataEntry(): TransformedData_DataEntry {
+function createBaseProjectionsTransformedData_DataEntry(): ProjectionsTransformedData_DataEntry {
   return { key: "", value: "" };
 }
 
-export const TransformedData_DataEntry = {
-  encode(message: TransformedData_DataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const ProjectionsTransformedData_DataEntry = {
+  encode(message: ProjectionsTransformedData_DataEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -507,10 +518,10 @@ export const TransformedData_DataEntry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): TransformedData_DataEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectionsTransformedData_DataEntry {
     const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTransformedData_DataEntry();
+    const message = createBaseProjectionsTransformedData_DataEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -537,11 +548,11 @@ export const TransformedData_DataEntry = {
     return message;
   },
 
-  fromJSON(object: any): TransformedData_DataEntry {
+  fromJSON(object: any): ProjectionsTransformedData_DataEntry {
     return { key: isSet(object.key) ? String(object.key) : "", value: isSet(object.value) ? String(object.value) : "" };
   },
 
-  toJSON(message: TransformedData_DataEntry): unknown {
+  toJSON(message: ProjectionsTransformedData_DataEntry): unknown {
     const obj: any = {};
     if (message.key !== "") {
       obj.key = message.key;
@@ -552,11 +563,15 @@ export const TransformedData_DataEntry = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TransformedData_DataEntry>, I>>(base?: I): TransformedData_DataEntry {
-    return TransformedData_DataEntry.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<ProjectionsTransformedData_DataEntry>, I>>(
+    base?: I,
+  ): ProjectionsTransformedData_DataEntry {
+    return ProjectionsTransformedData_DataEntry.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TransformedData_DataEntry>, I>>(object: I): TransformedData_DataEntry {
-    const message = createBaseTransformedData_DataEntry();
+  fromPartial<I extends Exact<DeepPartial<ProjectionsTransformedData_DataEntry>, I>>(
+    object: I,
+  ): ProjectionsTransformedData_DataEntry {
+    const message = createBaseProjectionsTransformedData_DataEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
