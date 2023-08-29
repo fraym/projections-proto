@@ -62,7 +62,7 @@ export {
     TypeArgument,
     TypeDirective,
     TypeField,
-} from "./management/migration";
+} from "./management/projections_migration";
 
 export {
     DataToTransform,

@@ -25,7 +25,7 @@ import {
   RollbackMigrationResponse,
   StartMigrationRequest,
   StartMigrationResponse,
-} from "./migration";
+} from "./projections_migration";
 
 export const protobufPackage = "management";
 

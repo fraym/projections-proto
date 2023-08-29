@@ -1,3 +1,7 @@
+# v2.0.1
+
+-   (bug) Fix migration proto file name
+
 # v2.0.0
 
 -   (bc) New migration API

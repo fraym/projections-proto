@@ -1,6 +1,6 @@
 syntax = "proto3";
 package management;
-import "management/migration.proto";
+import "management/projections_migration.proto";
 import "management/data_transformation.proto";
   
 service ProjectionsService {
